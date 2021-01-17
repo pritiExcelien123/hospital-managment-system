@@ -137,3 +137,15 @@ Route::get('/wardlist', 'PatientController@get_ward_list');
 // Statistics Routes
 Route::get('/stats', ['as' => 'stats', 'uses' => 'AnalyticsController@index'])->middleware('doctor', 'admin');
 Route::post('/stats-old', ['as' => 'stats_old', 'uses' => 'AnalyticsController@index'])->middleware('doctor', 'admin');
+
+
+// Patient details
+Route::get('/patient-record/{id}', ['as' => 'patient-record', 'uses' => 'PatientController@patientRecord'])->middleware('auth', 'staff', 'lang');
+Route::post('/update-patient-records', ['as' => 'update-patient-records', 'uses' => 'PatientController@updatePatientRecord'])->middleware('auth', 'doctor', 'lang');
+
+// Investigstion sheet
+Route::get('/investigation-sheet/{id}', ['as' => 'investigation-sheet', 'uses' => 'PatientController@investigationSheet'])->middleware('auth', 'lang', 'staff');
+Route::post('/update-investigation-sheet', ['as' => 'update-investigation-sheet', 'uses' => 'PatientController@updateInvestigationSheet'])->middleware('auth', 'doctor', 'lang');
+
+// Nurse Order sheet
+Route::get('/nurse-order-sheet/{id}', ['as' => 'nurse-order-sheet', 'uses' => 'PatientController@nurseOrderSheet'])->middleware('auth', 'lang', 'staff');

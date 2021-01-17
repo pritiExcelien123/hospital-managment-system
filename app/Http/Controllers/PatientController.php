@@ -8,6 +8,7 @@ use App\Http\Controllers\Redirect;
 use App\inpatient;
 use App\Medicine;
 use App\Patients;
+use App\Patients_Record;
 use App\Prescription;
 use App\Prescription_Medicine;
 use App\Ward;
@@ -697,5 +698,128 @@ public function addChannel(Request $request)
                 ->with('unsuccess', 'Error in Updating details !!!');
         }
 
+    }
+
+    /*
+        get patient records
+    */
+    public function patientRecord($id)
+    {
+        $user = Auth::user();
+        $data = DB::table('patients_record')
+                ->join('patients', 'patients.id', '=', 'patients_record.patient_id')
+                ->join('ms_symptoms_type', 'ms_symptoms_type.id', '=', 'patients_record.symptom_id')
+                ->join('ms_arrival_type', 'ms_arrival_type.id', '=', 'patients_record.arrival_id')
+                ->join('ms_investigation_type', 'ms_investigation_type.id', '=', 'patients_record.investigation_id')
+                ->select('patients_record.*','patients.name','ms_symptoms_type.name as symptoms','ms_arrival_type.name as arrival_name','ms_investigation_type.name as investigation','ms_investigation_type.type as investigation_type')
+                ->where('patients_record.patient_id',2101171)
+                ->first();
+        return view('patient.patient_record_view', ['title' => "Edit Patient",'patient' => $data]);
+    }
+
+    /*
+       update patient records
+    */
+
+    public function updatePatientRecord(Request $result)
+    {
+        // dd($result->reg_pbd);
+        $user = Auth::user();
+        // print_r($result->temprature);die;
+        $query = DB::table('patients_record')
+            ->where('patient_id',2101171)
+            ->update(array(
+                'temprature' => $result->temprature,
+                'rr' => $result->patient_rr,
+                'pulse_rate' => $result->pulse_rate,
+                'crt' => $result->patient_crt,
+                'bp' => $result->patient_bp,
+                'spo2' => $result->patient_spo2,
+                'weight' => $result->patient_weight,
+                'ht_lt' => $result->patient_ht_lt,
+                'mu_ac' => $result->patient_mu_ac,
+                'weight_legnth' => $result->patient_weight_legnth,
+                'systemic_examination' => $result->patient_systemic_examination,
+                'treatment_info' => $result->patient_treatment_info,
+                'diagnosis_info' => $result->patient_diagnosis_info,
+                'date' => $result->patient_date,
+                'report' => $result->patient_report
+            ));
+// print_r($query);die;
+        if ($query) {
+            //activity log
+            activity()->performedOn($user)->log('Patient details updated!');
+            return redirect()
+                ->route('searchPatient')
+                ->with('success', 'You have successfully updated patient details.');
+        } else {
+            return redirect()
+                ->route('searchPatient')
+                ->with('unsuccess', 'Error in Updating details !!!');
+        }
+
+    }
+
+
+    /*
+        get patient investigation sheet
+    */
+    public function investigationSheet($id)
+    {
+        $user = Auth::user();
+        $data = DB::table('ps_investigation_sheet')
+                ->join('patients', 'patients.id', '=', 'ps_investigation_sheet.patient_id')
+                ->join('ms_investigation_type', 'ms_investigation_type.id', '=', 'ps_investigation_sheet.investigation_id')
+                ->select('ps_investigation_sheet.*','patients.name as patient_name','ms_investigation_type.type','ms_investigation_type.name')
+                ->where('ps_investigation_sheet.patient_id',$id)
+                ->first();
+                // print_r($data);die;
+        return view('patient.investigation_sheet', ['title' => "Investigation Sheet",'patient' => $data]);
+    }
+
+
+    /*
+       update patient records
+    */
+
+    public function updateInvestigationSheet(Request $result)
+    {
+        $user = Auth::user();
+        $query = DB::table('ps_investigation_sheet')
+            ->where('patient_id',2101171)
+            ->update(array(
+                'date' => $result->investigation_date,                
+                'report' => $result->investigation_report
+            ));
+// print_r($query);die;
+        if ($query) {
+            //activity log
+            activity()->performedOn($user)->log('Patient details updated!');
+            return redirect()
+                ->route('searchPatient')
+                ->with('success', 'You have successfully updated patient details.');
+        } else {
+            return redirect()
+                ->route('searchPatient')
+                ->with('unsuccess', 'Error in Updating details !!!');
+        }
+
+    }
+
+
+    /*
+        get nurse order sheet
+    */
+    public function nurseOrderSheet($id)
+    {
+        $user = Auth::user();
+        $data = DB::table('ps_nurse_order_sheet')
+                ->join('patients', 'patients.id', '=', 'ps_nurse_order_sheet.patient_id')
+                ->join('ms_treatment_type', 'ms_treatment_type.id', '=', 'ps_nurse_order_sheet.treatment_id')
+                ->select('ps_nurse_order_sheet.*','patients.name as patient_name','ms_treatment_type.type','ms_treatment_type.name')
+                ->where('ps_nurse_order_sheet.patient_id',$id)
+                ->first();
+                print_r($data);die;
+        return view('patient.nurse_order_sheet', ['title' => "Nurse Order Sheet",'patient' => $data]);
     }
 }

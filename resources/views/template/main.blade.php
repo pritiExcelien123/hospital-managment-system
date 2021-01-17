@@ -61,7 +61,7 @@ $outlet = 'Rural Ayruvedic Hospital Kesbawa';
         integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 
 
-    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js"></script>
 
     @yield('custom_style_sheets')
     <link rel="stylesheet" href="{{ URL::asset('/css/bsutility.css') }}">
