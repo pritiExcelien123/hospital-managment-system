@@ -41,31 +41,44 @@
                         <div class="form-group">
                             <label for="inputEmail3" class="col-sm-2 control-label">{{__('Symptoms')}}</label>
                             <div class="col-sm-10">
-                                <input  value="{{$patient->symptoms}}" disabled="disabled" type="text" required class="form-control" name="patient_symptoms"
-                                    placeholder="Enter Patient Symptoms">
+                                <?php //print_r($symptoms);die;?>
+                            <select class="form-control select2-multi" multiple="multiple" name="patient_symptoms[]" id="patient_symptoms">
+                                @foreach ($symptoms as $symptom)
+                                <option value="{{$symptom->id}}">{{ucWords($symptom->name)}}</option>
+                                @endforeach
+                            </select>
+
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="inputEmail3" class="col-sm-2 control-label">{{__('Arrival')}}</label>
-                            <div class="col-sm-10">
-                                <input  value="{{$patient->arrival_name}}" disabled="disabled" type="text" required class="form-control" name="patient_arrival_name"
-                                    placeholder="Enter Patient Arrival">
+                            <div class="col-sm-10">                               
+                                <select class="form-control select2-multi" multiple="multiple" name="patient_arrival_name[]" id="patient_arrival_name">
+                                    <option value="">Select Arrival</option>
+                                    @foreach ($arrival as $avl)
+                                    <option value="{{$avl->id}}">{{ucWords($avl->name)}}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="inputEmail3" class="col-sm-2 control-label">{{__('Investigation Type')}}</label>
-                            <div class="col-sm-10">
-                                <input  value="{{$patient->investigation_type}}" disabled="disabled" type="text" required class="form-control" name="patient_investigation_type"
-                                    placeholder="Enter Patient Investigation Type">
+                            <div class="col-sm-10">                                
+                                <select class="form-control select2-multi" multiple="multiple" name="patient_investigation_type[]" id="patient_investigation_type">
+                                    <option value="">Select Investigation Type</option>
+                                    @foreach ($investigation as $inv)
+                                    <option value="{{$inv->id}}">{{ucWords($inv->type)}}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
-                        <div class="form-group">
+                        <!-- <div class="form-group">
                             <label for="inputEmail3" class="col-sm-2 control-label">{{__('Investigation Name')}}</label>
                             <div class="col-sm-10">
                                 <input  value="{{$patient->investigation}}" disabled="disabled" type="text" required class="form-control" name="patient_investigation"
                                     placeholder="Enter Patient Investigation">
                             </div>
-                        </div>
+                        </div> -->
                         <div class="form-group">
                             <label for="inputPassword3" class="col-sm-2 control-label">{{__('Temprature')}}</label>
                             <div class="col-sm-10">
@@ -210,6 +223,14 @@
         </div>
         <div class="col-md-1"></div>
     </div>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script> 
+<script>
+    
+    $(document).ready(function() {
+        $("#patient_symptoms").select2();
+        $("#patient_arrival_name").select2();
+        $("#patient_investigation_type").select2();
+    });
+</script>
 
 @endsection
