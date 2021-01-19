@@ -149,3 +149,9 @@ Route::post('/update-investigation-sheet', ['as' => 'update-investigation-sheet'
 
 // Nurse Order sheet
 Route::get('/nurse-order-sheet/{id}', ['as' => 'nurse-order-sheet', 'uses' => 'PatientController@nurseOrderSheet'])->middleware('auth', 'lang', 'staff');
+Route::post('/update-nurseorder-sheet', ['as' => 'update-nurseorder-sheet', 'uses' => 'PatientController@updateNurseOrderSheet'])->middleware('auth', 'doctor', 'lang');
+
+
+// Monitoring Sheet
+Route::get('/monitoring-sheet/{id}', ['as' => 'monitoring-sheet', 'uses' => 'PatientController@monitoringSheet'])->middleware('auth', 'lang', 'staff');
+Route::post('/update-nurseorder-sheet', ['as' => 'update-nurseorder-sheet', 'uses' => 'PatientController@updateNurseOrderSheet'])->middleware('auth', 'doctor', 'lang');

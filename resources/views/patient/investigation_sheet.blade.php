@@ -45,20 +45,26 @@
                                     placeholder="Enter Doctor Name ">
                             </div>
                         </div>
+                        
+
                         <div class="form-group">
-                            <label for="inputPassword3" class="col-sm-2 control-label">{{__('Investigation Type')}}</label>
-                            <div class="col-sm-10">
-                                <input  value="{{$patient->type}}" type="tel" class="form-control" name="investigation_type"
-                                    placeholder="Investigation Type">
+                            <label for="inputEmail3" class="col-sm-2 control-label">{{__('Investigation Type')}}</label>
+                            <div class="col-sm-10">                                
+                                <select class="form-control select2-multi" multiple="multiple" name="investigation_type[]" id="investigation_type">
+                                    <option value="">Select Investigation Type</option>
+                                    @foreach ($investigation as $inv)
+                                    <option value="{{$inv->id}}">{{ucWords($inv->type)}}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
-                        <div class="form-group">
+                       <!--  <div class="form-group">
                             <label for="inputPassword3" class="col-sm-2 control-label">{{__('Name')}}</label>
                             <div class="col-sm-10">
                                 <input  value="{{$patient->name}}" type="text" required class="form-control" name="investigation_name"
                                     placeholder="Enter Investigation Name">
                             </div>
-                        </div>
+                        </div> -->
 
                         
                         <div class="form-group">

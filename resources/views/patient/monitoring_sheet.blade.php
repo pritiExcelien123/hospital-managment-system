@@ -21,7 +21,7 @@
             <!-- Horizontal Form -->
             <div class="box box-info">
                 <div class="box-header with-border">
-                    <h3 class="box-title">{{__('Nurse Order Sheet')}}</h3>
+                    <h3 class="box-title">{{__('Monitoring Sheet')}}</h3>
                 </div>
                 <!-- /.box-header -->
                 <!-- form start -->
@@ -46,55 +46,17 @@
                             </div>
                         </div>
                         
-
                         <div class="form-group">
-                            <label for="inputEmail3" class="col-sm-2 control-label">{{__('Treatment Type')}}</label>
+                            <label for="inputEmail3" class="col-sm-2 control-label">{{__('Monitoring Type')}}</label>
                             <div class="col-sm-10">                                
-                                <select class="form-control select2-multi" multiple="multiple" name="treatment_type[]" id="treatment_type">
-                                    <option value="">Select Treatment Type</option>
-                                    @foreach ($treatment as $trt)
-                                    <option value="{{$trt->id}}">{{ucWords($trt->type)}}</option>
+                                <select class="form-control select2-multi" multiple="multiple" name="monitoring_type[]" id="monitoring_type">
+                                    <option value="">Select Monitoring Type</option>
+                                    @foreach ($monitoring as $mnt)
+                                    <option value="{{$mnt->id}}">{{ucWords($mnt->name)}}</option>
                                     @endforeach
                                 </select>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="inputPassword3" class="col-sm-2 control-label">{{__('Treatment Name')}}</label>
-                            <div class="col-sm-10">
-                                <input  value="{{$patient->name}}" type="text" required class="form-control" name="treatment_name"
-                                    placeholder="Enter Treatment Name">
-                            </div>
-                        </div>
-
-                        
-                        <div class="form-group">
-                             <label class="col-sm-2 control-label">{{__('Treatment Time')}}<span style="color:red">*</span></label>
-                            <div class="col-sm-3">
-                                <div class="input-group date">
-                                    <div class="input-group-addon">
-                                        <i class="fa fa-calendar"></i>
-                                    </div>
-                                    <input  value="{{$patient->time}}" type="text" class="form-control pull-right" name="treatment_time"
-                                        placeholder="Enter Treatment Time">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="inputPassword3" class="col-sm-2 control-label">{{__('Total Dose')}}</label>
-                            <div class="col-sm-10">
-                                <input  value="{{$patient->total_dose}}" type="text" required class="form-control" name="total_dose"
-                                    placeholder="Enter Total Dose">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="inputPassword3" class="col-sm-2 control-label">{{__('Remark')}}</label>
-                            <div class="col-sm-10">
-                                <input  value="{{$patient->remark}}" type="text" required class="form-control" name="remark"
-                                    placeholder="Enter Remark">
-                            </div>
-                        </div>
+                        </div>                        
 
                         <div class="form-group">
                             <label for="inputPassword3" class="col-sm-2 control-label">{{__('Report')}}</label>

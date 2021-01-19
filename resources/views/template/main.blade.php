@@ -73,7 +73,15 @@ $outlet = 'Rural Ayruvedic Hospital Kesbawa';
 
     <script src="https://code.jquery.com/jquery-3.4.1.js"
         integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
-
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script> 
+<script>
+    
+    $(document).ready(function() {
+        $("#investigation_type").select2();
+        $("#treatment_type").select2();
+        $("#monitoring_type").select2();
+    });
+</script>
     <style>
         @yield('custom_styles') .spinner {
             margin: 0;

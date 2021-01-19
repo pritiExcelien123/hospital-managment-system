@@ -14,6 +14,8 @@ use App\Prescription_Medicine;
 use App\Symptoms;
 use App\Arrival;
 use App\Investigation;
+use App\Treatment;
+use App\Monitoring;
 use App\Ward;
 use Carbon\Carbon;
 use DB;
@@ -791,8 +793,11 @@ public function addChannel(Request $request)
                 ->select('ps_investigation_sheet.*','patients.name as patient_name','ms_investigation_type.type','ms_investigation_type.name')
                 ->where('ps_investigation_sheet.patient_id',$id)
                 ->first();
+        $investigation = Investigation::where(function ($query) {
+                $query->where('status', '=', '1');                  
+                })->get();
                 // print_r($data);die;
-        return view('patient.investigation_sheet', ['title' => "Investigation Sheet",'patient' => $data]);
+        return view('patient.investigation_sheet', ['title' => "Investigation Sheet",'patient' => $data,'investigation' => $investigation]);
     }
 
 
@@ -803,11 +808,14 @@ public function addChannel(Request $request)
     public function updateInvestigationSheet(Request $result)
     {
         $user = Auth::user();
+        $patientInvestigationType = implode(',', $result->investigation_type);
+        // print_r($patientInvestigationType);die;
         $query = DB::table('ps_investigation_sheet')
             ->where('patient_id',2101171)
             ->update(array(
                 'date' => $result->investigation_date,                
-                'report' => $result->investigation_report
+                'report' => $result->investigation_report,
+                'investigation_id' => $patientInvestigationType
             ));
 // print_r($query);die;
         if ($query) {
@@ -837,7 +845,62 @@ public function addChannel(Request $request)
                 ->select('ps_nurse_order_sheet.*','patients.name as patient_name','ms_treatment_type.type','ms_treatment_type.name')
                 ->where('ps_nurse_order_sheet.patient_id',$id)
                 ->first();
-                print_r($data);die;
-        return view('patient.nurse_order_sheet', ['title' => "Nurse Order Sheet",'patient' => $data]);
+                // print_r($data);die;
+        $treatment = Treatment::where(function ($query) {
+                $query->where('status', '=', '1');                  
+                })->get();
+        return view('patient.nurse_order_sheet', ['title' => "Nurse Order Sheet",'patient' => $data,'treatment' =>$treatment]);
+    }
+
+
+    /*
+       update nurse order
+    */
+
+    public function updateNurseOrderSheet(Request $result)
+    {
+        $user = Auth::user();
+        $treatmentType = implode(',', $result->treatment_type);
+        // print_r($treatmentType);die;
+        $query = DB::table('ps_nurse_order_sheet')
+            ->where('patient_id',2101171)
+            ->update(array(
+                'time' => $result->treatment_time,                
+                'total_dose' => $result->total_dose,
+                'remark' => $result->remark,
+                'report' => $result->report,
+                'treatment_id' => $treatmentType
+            ));
+// print_r($query);die;
+        if ($query) {
+            //activity log
+            activity()->performedOn($user)->log('Nurse Order Sheet updated!');
+            return redirect()
+                ->route('searchPatient')
+                ->with('success', 'You have successfully updated patient details.');
+        } else {
+            return redirect()
+                ->route('searchPatient')
+                ->with('unsuccess', 'Error in Updating details !!!');
+        }
+
+    }
+
+    /*
+        get monitoring sheet
+    */
+    public function monitoringSheet($id)
+    {
+        $user = Auth::user();
+        $data = DB::table('ps_nurse_order_sheet')
+                ->join('patients', 'patients.id', '=', 'ps_nurse_order_sheet.patient_id')
+                ->select('ps_nurse_order_sheet.*','patients.name as patient_name')
+                ->where('ps_nurse_order_sheet.patient_id',$id)
+                ->first();
+                // print_r($data);die;
+        $monitoring = Monitoring::where(function ($query) {
+                $query->where('status', '=', '1');                  
+                })->get();
+        return view('patient.monitoring_sheet', ['title' => "Nurse Order Sheet",'patient' => $data,'monitoring' =>$monitoring]);
     }
 }
