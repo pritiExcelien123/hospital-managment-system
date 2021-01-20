@@ -67,12 +67,55 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="inputEmail3" class="col-sm-2 control-label">{{__('NIC Number')}}</label>
+                        <label for="inputEmail3" class="col-sm-2 control-label">{{__('Father Name')}} <span
+                                style="color:red">*</span></label>
                         <div class="col-sm-10">
-                            <input type="text"  maxlength="12"
-                                class="form-control" name="reg_pnic" placeholder="National Identity Card Number">
+                            <input type="text"  pattern="^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$"
+                                required class="form-control" name="father_name" placeholder="Enter Patient Father Name">
                         </div>
                     </div>
+                    <div class="form-group">
+                        <label for="inputEmail3" class="col-sm-2 control-label">{{__('Mother Name')}} <span
+                                style="color:red">*</span></label>
+                        <div class="col-sm-10">
+                            <input type="text"  pattern="^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$"
+                                required class="form-control" name="mother_name" placeholder="Enter Patient Mother Name">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputEmail3" class="col-sm-2 control-label">{{__('Age')}} <span
+                                style="color:red">*</span></label>
+                        <div class="col-sm-10">
+                            <input type="text" 
+                                required class="form-control" name="patient_age" placeholder="Enter Patient Age">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputEmail3" class="col-sm-2 control-label">{{__('Refered From')}} <span
+                                style="color:red">*</span></label>
+                        <div class="col-sm-10">
+                            <input type="text"  pattern="^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$"
+                                required class="form-control" name="refered_from" placeholder="Enter Refered From">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputEmail3" class="col-sm-2 control-label">{{__('Mode of Transport')}} <span
+                                style="color:red">*</span></label>
+                        <div class="col-sm-10">
+                            <input type="text"  pattern="^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$"
+                                required class="form-control" name="mode_of_transport" placeholder="Enter Mode of Transport">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputEmail3" class="col-sm-2 control-label">{{__('Immunizaition Status')}} <span
+                                style="color:red">*</span></label>
+                        <div class="col-sm-10">
+                            <input type="text"  pattern="^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$"
+                                required class="form-control" name="immunizaition_status" placeholder="Enter Immunizaition Status">
+                        </div>
+                    </div>
+
+                    
                     <div class="form-group">
                         <label for="inputPassword3" class="col-sm-2 control-label">{{__('Address')}} <span
                                 style="color:red">*</span></label>
@@ -94,6 +137,62 @@
                                 style="color:red">*</span></label>
                         <div class="col-sm-10">
                             <input type="text" required class="form-control" name="reg_poccupation"
+                                placeholder="Enter Patient Occupation ">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPassword3" class="col-sm-2 control-label">{{__('Birth Place')}} <span
+                                style="color:red">*</span></label>
+                        <div class="col-sm-10">
+                            <input type="text" required class="form-control" name="birth_place"
+                                placeholder="Enter Patient Birth Place ">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPassword3" class="col-sm-2 control-label">{{__('Nationality')}} <span
+                                style="color:red">*</span></label>
+                        <div class="col-sm-10">
+                            <input type="text" required class="form-control" name="nationality"
+                                placeholder="Enter Patient Nationality ">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPassword3" class="col-sm-2 control-label">{{__('Religion')}} <span
+                                style="color:red">*</span></label>
+                        <div class="col-sm-10">
+                            <input type="text" required class="form-control" name="religion"
+                                placeholder="Enter Patient Religion ">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPassword3" class="col-sm-2 control-label">{{__('Income')}} <span
+                                style="color:red">*</span></label>
+                        <div class="col-sm-10">
+                            <input type="text" required class="form-control" name="income"
+                                placeholder="Enter Patient Income ">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPassword3" class="col-sm-2 control-label">{{__('Guardian')}} <span
+                                style="color:red">*</span></label>
+                        <div class="col-sm-10">
+                            <input type="text" required class="form-control" name="guardian"
+                                placeholder="Enter Patient Guardian ">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPassword3" class="col-sm-2 control-label">{{__('Guardian Address')}} <span
+                                style="color:red">*</span></label>
+                        <div class="col-sm-10">
+                            <input type="text" required class="form-control" name="guardian_address"
+                                placeholder="Enter Patient Guardian Address ">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPassword3" class="col-sm-2 control-label">{{__('Occupation')}} <span
+                                style="color:red">*</span></label>
+                        <div class="col-sm-10">
+                            <input type="text" required class="form-control" name="occupation"
                                 placeholder="Enter Patient Occupation ">
                         </div>
                     </div>

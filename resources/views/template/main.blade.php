@@ -390,6 +390,10 @@ $outlet = 'Rural Ayruvedic Hospital Kesbawa';
                                     href="{{route('searchPatient')}}"></i><i class="fas fa-search"
                                         aria-hidden="true"></i> Search Patient</a>
                             </li>
+                             <li class="{{Active::checkRoute(['patientList','patientList'])}}"><a
+                                    href="{{route('patientList')}}"></i><i class="fas fa-search"
+                                        aria-hidden="true"></i> Patient List</a>
+                            </li>
 
                             <li class="{{Active::checkRoute(['patientProfileIntro','patientProfile'])}}"><a
                                     href="{{route('patientProfileIntro')}}"></i><i class="fas fa-id-card"

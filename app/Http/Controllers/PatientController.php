@@ -155,14 +155,28 @@ class PatientController extends Controller
 
             $patient->id = $reg_num;
             $patient->name = $request->reg_pname;
+            $patient->father_name = $request->father_name;
+            $patient->mother_name = $request->mother_name;
+            $patient->age = $request->patient_age;
+            $patient->refered_from = $request->refered_from;
+            $patient->mode_of_transport = $request->mode_of_transport;
+            $patient->immunizaition_status = $request->immunizaition_status;
+            $patient->occupation = $request->occupation;
+            $patient->birth_place = $request->birth_place;
+            $patient->nationality = $request->nationality;
+            $patient->religion = $request->religion;
+            $patient->income  = $request->income;
+
+            $patient->guardian = $request->guardian;
+            $patient->guardian_address = $request->guardian_address;
             $patient->address = $request->reg_paddress;
             $patient->occupation = $request->reg_poccupation;
             $patient->sex = $request->reg_psex;
-            $patient->bod = date_format($date, "Y-m-d");
+            $patient->dob = date_format($date, "Y-m-d");
             $patient->telephone = $request->reg_ptel;
-            $patient->nic = $request->reg_pnic;
-            $patient->image = $reg_num . ".png";
-
+            // $patient->nic = $request->reg_pnic;
+            // $patient->image = $reg_num . ".png";
+// print_r($patient);die;
             $patient->save();
             session()->flash('regpsuccess', 'Patient ' . $request->reg_pname . ' Registered Successfully !');
             session()->flash('pid', "$reg_num");
@@ -902,5 +916,16 @@ public function addChannel(Request $request)
                 $query->where('status', '=', '1');                  
                 })->get();
         return view('patient.monitoring_sheet', ['title' => "Nurse Order Sheet",'patient' => $data,'monitoring' =>$monitoring]);
+    }
+
+
+    public function patientList()
+    {
+        $wardList = $this->wardList;
+        $data=DB::table('patients')->select('*')->get();
+         return view('patient.patient_list_view', ['title' => "Nurse Order Sheet",'data'=>$data]);
+        // $wards = Ward::all();
+        // dd($wardss);
+        // return view('register_in_patient_view', compact(['wards']));
     }
 }

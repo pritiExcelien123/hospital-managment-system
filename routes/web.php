@@ -78,6 +78,7 @@ Route::get('/reports-data', ['as' => 'inPatientReportData', 'uses' => 'PatientCo
 
 // Search & Patient Profile Routes
 Route::get('/searchpatient', ['as' => 'searchPatient', 'uses' => 'PatientController@searchPatient'])->middleware('auth', 'staff', 'lang');
+Route::get('/patientList', ['as' => 'patientList', 'uses' => 'PatientController@patientList'])->middleware('auth', 'staff', 'lang');
 Route::get('/search', ['as' => 'searchData', 'uses' => 'PatientController@patientData'])->middleware('auth', 'staff', 'lang');
 Route::get('/patient-profile', ['as' => 'patientProfileIntro', 'uses' => 'PatientController@patientProfileIntro'])->middleware('auth', 'staff', 'lang');
 Route::get('/patient/{id}', ['as' => 'patientProfile', 'uses' => 'PatientController@patientProfile'])->middleware('auth', 'lang', 'staff');
