@@ -731,8 +731,9 @@ public function addChannel(Request $request)
                 ->join('ms_illness_arrival_type', 'ms_illness_arrival_type.id', '=', 'ps_patients_record.arrival_id')
                 ->join('ms_investigation_type', 'ms_investigation_type.id', '=', 'ps_patients_record.investigation_id')
                 ->select('ps_patients_record.*','patients.name','ms_symptoms_type.name as symptoms','ms_illness_arrival_type.name as arrival_name','ms_investigation_type.name as investigation','ms_investigation_type.type as investigation_type')
-                ->where('ps_patients_record.patient_id',2101171)
+                ->where('ps_patients_record.patient_id',$id)
                 ->first();
+                // print_r($data);die;
         $symptoms = Symptoms::where(function ($query) {
                 $query->where('status', '=', '1');                  
                 })->get();
@@ -752,13 +753,16 @@ public function addChannel(Request $request)
 
     public function updatePatientRecord(Request $result)
     {
-        // dd($result->reg_pbd);
+        // dd($result->patient_report);
         $user = Auth::user();
         $patientSymptoms = implode(',', $result->patient_symptoms);
         $patientArrivalName = implode(',', $result->patient_arrival_name);
+
         $patientInvestigationType = implode(',', $result->patient_investigation_type);
+        // print_r($patientInvestigationType);die;
+
         $query = DB::table('ps_patients_record')
-            ->where('patient_id',2101171)
+            ->where('patient_id',$result->reg_pid)
             ->update(array(
                 'temprature' => $result->temprature,
                 'rr' => $result->patient_rr,
@@ -772,7 +776,7 @@ public function addChannel(Request $request)
                 'weight_legnth' => $result->patient_weight_legnth,
                 'systemic_examination' => $result->patient_systemic_examination,
                 'treatment_info' => $result->patient_treatment_info,
-                'diagnosis_info' => $result->patient_diagnosis_info,
+                'diagcnosis_info' => $result->patient_diagnosis_info,
                 'date' => $result->patient_date,
                 'report' => $result->patient_report,
                 'symptom_id' => $patientSymptoms,
@@ -919,13 +923,29 @@ public function addChannel(Request $request)
     }
 
 
+    /*
+        get treatment sheet
+    */
+    public function treatmentSheet($id)
+    {
+        $user = Auth::user();
+        $data = DB::table('ps_treatment_continuation_sheet')
+                ->join('patients', 'patients.id', '=', 'ps_treatment_continuation_sheet.patient_id')
+                ->select('ps_treatment_continuation_sheet.*','patients.name as patient_name')
+                ->where('ps_treatment_continuation_sheet.patient_id',$id)
+                ->first();
+                // print_r($data);die;
+        $treatment = Treatment::where(function ($query) {
+                $query->where('status', '=', '1');                  
+                })->get();
+        return view('patient.treatment_sheet', ['title' => "Treatment Continuation Sheet",'patient' => $data,'treatment' =>$treatment]);
+    }
+
+
     public function patientList()
     {
         $wardList = $this->wardList;
         $data=DB::table('patients')->select('*')->get();
-         return view('patient.patient_list_view', ['title' => "Nurse Order Sheet",'data'=>$data]);
-        // $wards = Ward::all();
-        // dd($wardss);
-        // return view('register_in_patient_view', compact(['wards']));
+         return view('patient.patient_list_view', ['title' => "Patient List",'data'=>$data]);
     }
 }

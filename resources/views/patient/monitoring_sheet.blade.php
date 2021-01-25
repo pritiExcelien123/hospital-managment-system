@@ -79,7 +79,7 @@
                             </div>
 
                             <div class="col-sm-3">
-                                <a href="{{ url('/monitoring-sheet/' . $patient->patient_id) }}" class="btn btn-danger pull-right">Monitoring Sheet</a>
+                                <a href="{{ url('/treatment-sheet/' . $patient->patient_id) }}" class="btn btn-danger pull-right">Treatment Continuation Sheet</a>
                             </div>
 
                         </div>

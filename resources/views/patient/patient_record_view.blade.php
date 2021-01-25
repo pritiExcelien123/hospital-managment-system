@@ -26,7 +26,6 @@
                 <!-- /.box-header -->
                 <!-- form start -->
                 
-
                 @if ($patient)
                 <form class="form-horizontal" action="{{route('update-patient-records')}}" method="POST">
                     @csrf
@@ -44,7 +43,7 @@
                                 <?php //print_r($symptoms);die;?>
                             <select class="form-control select2-multi" multiple="multiple" name="patient_symptoms[]" id="patient_symptoms">
                                 @foreach ($symptoms as $symptom)
-                                <option value="{{$symptom->id}}">{{ucWords($symptom->name)}}</option>
+                                <option value="{{$symptom->id}}" <?php if(in_array($symptom->id,explode(',', $patient->symptom_id))) {?>selected <?php }?>>{{ucWords($symptom->name)}}</option>
                                 @endforeach
                             </select>
 
@@ -56,7 +55,7 @@
                                 <select class="form-control select2-multi" multiple="multiple" name="patient_arrival_name[]" id="patient_arrival_name">
                                     <option value="">Select Arrival</option>
                                     @foreach ($arrival as $avl)
-                                    <option value="{{$avl->id}}">{{ucWords($avl->name)}}</option>
+                                    <option value="{{$avl->id}}" <?php if(in_array($avl->id,explode(',', $patient->arrival_id))) {?>selected <?php }?>>{{ucWords($avl->name)}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -67,7 +66,7 @@
                                 <select class="form-control select2-multi" multiple="multiple" name="patient_investigation_type[]" id="patient_investigation_type">
                                     <option value="">Select Investigation Type</option>
                                     @foreach ($investigation as $inv)
-                                    <option value="{{$inv->id}}">{{ucWords($inv->type)}}</option>
+                                    <option value="{{$inv->id}}" <?php if(in_array($inv->id,explode(',', $patient->investigation_id))) {?>selected <?php }?>>{{ucWords($inv->type)}}</option>
                                     @endforeach
                                 </select>
                             </div>

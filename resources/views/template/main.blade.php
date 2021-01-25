@@ -375,6 +375,62 @@ $outlet = 'Rural Ayruvedic Hospital Kesbawa';
                     @if($user_type!='Pharmacist')
                     {{--patient--}}
                     <li
+                        class="treeview {{Active::checkRoute(['master/symptoms_type','master/illness_arrival_type','master/general_examination','master/systemic_examination','master/investigation_type','master/round_shift','master/diagnosis_type','master/monitoring_type','master/treatment_type'])}}">
+                        <a href="#"><i class="fas fa-user-injured"></i><span> Master</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li class="{{Active::checkRoute('master/symptoms_type')}}"><a href="{{route('master/symptoms_type')}}"><i class="fas fa-user-plus" aria-hidden="true"></i>
+                                    Symptoms Type</a></li>
+
+                            <li class="{{Active::checkRoute('master/illness_arrival_type')}}"><a
+                                    href="{{route('master/illness_arrival_type')}}"></i><i class="fas fa-search"
+                                        aria-hidden="true"></i> Illness Arrival Type</a>
+                            </li>
+
+                            <li class="{{Active::checkRoute('master/general_examination')}}"><a
+                                    href="{{route('master/general_examination')}}"></i><i class="fas fa-id-card"
+                                        aria-hidden="true"></i> General Examination</a>
+                            </li>
+                            
+                            <li class="{{Active::checkRoute('master/systemic_examination')}}"><a
+                                    href="{{route('master/systemic_examination')}}"><i class="fas fa-user-plus"
+                                    area-hidden="true"></i><span> Systemic Examination</span></a>
+                            </li>
+
+                            <li class="{{Active::checkRoute('master/investigation_type')}}"><a
+                                    href="{{route('master/investigation_type')}}"><i class="fas fa-user-plus"
+                                    area-hidden="true"></i><span> Investigation Type</span></a>
+                            </li>   
+
+                            <li class="{{Active::checkRoute('master/diagnosis_type')}}"><a
+                                    href="{{route('master/diagnosis_type')}}"><i class="fas fa-user-plus"
+                                    area-hidden="true"></i><span> Diagnosis Type</span></a>
+                            </li>   
+
+                            <li class="{{Active::checkRoute('master/monitoring_type')}}"><a
+                                    href="{{route('master/monitoring_type')}}"><i class="fas fa-user-plus"
+                                    area-hidden="true"></i><span> Monitoring Type</span></a>
+                            </li>
+
+                            <li class="{{Active::checkRoute('master/treatment_type')}}"><a
+                                    href="{{route('master/treatment_type')}}"><i class="fas fa-user-plus"
+                                    area-hidden="true"></i><span> Treatment Type</span></a>
+                            </li>
+
+                            <li class="{{Active::checkRoute('master/round_shift')}}"><a
+                                    href="{{route('master/round_shift')}}"><i class="fas fa-user-plus"
+                                    area-hidden="true"></i><span> Round Shift</span></a>
+                            </li>                       
+
+                        </ul>
+                    </li>
+                    @endif
+                    @if($user_type!='Pharmacist')
+                    {{--patient--}}
+                    <li
                         class="treeview {{Active::checkRoute(['patient','register_in_patient_view','searchPatient','searchData','discharge_inpatient','patientProfileIntro','patientProfile'])}}">
                         <a href="#"><i class="fas fa-user-injured"></i><span> Patient</span>
                             <span class="pull-right-container">
@@ -543,7 +599,7 @@ $outlet = 'Rural Ayruvedic Hospital Kesbawa';
                             </li>
 
                             <li class="{{Active::checkRoute('attendance_report')}}"><a
-                                    href="{{route('attendance_report')}}"><i class="fa fa-clipboard
+                                    href="{{route('attendance_report')}}"><i class="fa fa-clipboard"
                                         aria-hidden=" true"></i> Attendance Report</a></li>
                         </ul>
                     </li>

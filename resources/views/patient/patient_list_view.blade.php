@@ -30,8 +30,7 @@
 </div>
 
 <div style="padding:3%" class="row">
-    <div class="col-md-1"></div>
-    <div class="col-md-10">
+    <div class="col-md-12">
         <div class="box">
             <div class="box-header">
                 <h3 class="box-title">{{__('Patient Lists')}}</h3>
@@ -48,6 +47,8 @@
                                 <th>{{__('Name')}}</th>
                                 <th>{{__('Age')}}</th>
                                 <th>{{__('Father Name')}}</th>
+                                <th>{{__('Mobile NO.')}}</th>
+                                <th>{{__('Action')}}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -56,6 +57,18 @@
                                 <td>{{$app->name}}</td>
                                 <td>{{$app->age}}</td>
                                 <td>{{$app->father_name}}</td>
+                                <td>{{$app->contactnumber}}</td>
+                                <td>
+                                    <div class="form-group">
+                                        <select class="form-control" id="select_action" onchange="editPersonDetails({{$app->id}});">
+                                            <option value="patient-record">Case Record</option>
+                                            <option value="treatment-sheet">Treatment & continuation Sheet</option>
+                                            <option value="nurse-order-sheet">Nurse Order Sheet</option>
+                                            <option value="monitoring-sheet">Nurse Monitoring Sheet</option>
+                                            <option value="investigation-sheet">Investigation Sheet</option>
+                                        </select>
+                                    </div>
+                                </td>
                             </tr>
                             @endforeach
                         </tbody>
@@ -65,14 +78,12 @@
             </div>
         </div>
     </div>
-    <div class="col-md-1"></div>
     <!-- /.box-body -->
 </div>
 @endsection
 @section('optional_scripts')
 <script>
     $(function () {
-
         $('#example1').DataTable({
             'paging': true,
             'lengthChange': true,
@@ -82,6 +93,15 @@
             'autoWidth': false
         })
     })
+
+    function editPersonDetails(person_id){
+        var action = $("#select_action").val();
+        //alert(action);
+        var url = "./"+action+"/"+person_id;
+
+        window.location.href = url;
+
+    }
 
 </script>
 

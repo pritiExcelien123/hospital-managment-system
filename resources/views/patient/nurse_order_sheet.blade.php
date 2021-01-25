@@ -109,7 +109,7 @@
                             <input readonly value="{{$patient->id}}" type="text" class="form-control pull-right" name="reg_pid" style="display:none">
                             
                             <div class="col-sm-3">
-                                <a href="{{ url('/investigation-sheet/' . $patient->patient_id) }}" class="btn btn-danger pull-right">Back</a>
+                                <a href="{{ url('/nurse-order-sheet/' . $patient->patient_id) }}" class="btn btn-danger pull-right">Back</a>
                             </div>
 
                             <div class="col-sm-3">

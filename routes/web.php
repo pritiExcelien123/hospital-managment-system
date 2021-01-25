@@ -156,3 +156,28 @@ Route::post('/update-nurseorder-sheet', ['as' => 'update-nurseorder-sheet', 'use
 // Monitoring Sheet
 Route::get('/monitoring-sheet/{id}', ['as' => 'monitoring-sheet', 'uses' => 'PatientController@monitoringSheet'])->middleware('auth', 'lang', 'staff');
 Route::post('/update-nurseorder-sheet', ['as' => 'update-nurseorder-sheet', 'uses' => 'PatientController@updateNurseOrderSheet'])->middleware('auth', 'doctor', 'lang');
+
+
+// Treatment Sheet
+Route::get('/treatment-sheet/{id}', ['as' => 'treatment-sheet', 'uses' => 'PatientController@treatmentSheet'])->middleware('auth', 'lang', 'staff');
+Route::post('/update-nurseorder-sheet', ['as' => 'update-nurseorder-sheet', 'uses' => 'PatientController@updateNurseOrderSheet'])->middleware('auth', 'doctor', 'lang');
+
+//Master Routes
+Route::get('/master/symptoms_type', ['as' => 'master/symptoms_type', 'uses' => 'MasterController@symptomsType'])->middleware('auth', 'lang');
+Route::post('/master/save_symptoms_type', ['as' => 'master/save_symptoms_type', 'uses' => 'MasterController@symptomsType'])->middleware('auth', 'lang');
+Route::get('/master/illness_arrival_type', ['as' => 'master/illness_arrival_type', 'uses' => 'MasterController@illnessArrivalType'])->middleware('auth', 'admin', 'lang');
+Route::post('/master/save_illness_arrival_type', ['as' => 'master/save_illness_arrival_type', 'uses' => 'MasterController@illnessArrivalType'])->middleware('auth', 'admin', 'lang');
+Route::get('/master/general_examination', ['as' => 'master/general_examination', 'uses' => 'MasterController@ExaminationType'])->middleware('auth', 'admin', 'lang');
+Route::post('/master/save_general_examination', ['as' => 'master/save_general_examination', 'uses' => 'MasterController@ExaminationType'])->middleware('auth', 'admin', 'lang');
+Route::get('/master/systemic_examination', ['as' => 'master/systemic_examination', 'uses' => 'MasterController@ExaminationType'])->middleware('auth', 'admin', 'lang');
+Route::post('/master/save_systemic_examination', ['as' => 'master/ssave_ystemic_examination', 'uses' => 'MasterController@ExaminationType'])->middleware('auth', 'admin', 'lang');
+Route::get('/master/investigation_type', ['as' => 'master/investigation_type', 'uses' => 'MasterController@investigationType'])->middleware('auth', 'admin', 'lang');
+Route::post('/master/save_investigation_type', ['as' => 'master/save_investigation_type', 'uses' => 'MasterController@investigationType'])->middleware('auth', 'admin', 'lang');
+Route::get('/master/diagnosis_type', ['as' => 'master/diagnosis_type', 'uses' => 'MasterController@diagnosisType'])->middleware('auth', 'admin', 'lang');
+Route::post('/master/save_diagnosis_type', ['as' => 'master/save_diagnosis_type', 'uses' => 'MasterController@diagnosisType'])->middleware('auth', 'admin', 'lang');
+Route::get('/master/monitoring_type', ['as' => 'master/monitoring_type', 'uses' => 'MasterController@monitoringType'])->middleware('auth', 'admin', 'lang');
+Route::post('/master/save_monitoring_type', ['as' => 'master/save_monitoring_type', 'uses' => 'MasterController@monitoringType'])->middleware('auth', 'admin', 'lang');
+Route::get('/master/round_shift', ['as' => 'master/round_shift', 'uses' => 'MasterController@roundShift'])->middleware('auth', 'admin', 'lang');
+Route::post('/master/save_round_shift', ['as' => 'master/save_round_shift', 'uses' => 'MasterController@roundShift'])->middleware('auth', 'admin', 'lang');
+Route::get('/master/treatment_type', ['as' => 'master/treatment_type', 'uses' => 'MasterController@treatmentType'])->middleware('auth', 'admin', 'lang');
+Route::post('/master/save_treatment_type', ['as' => 'master/save_treatment_type', 'uses' => 'MasterController@treatmentType'])->middleware('auth', 'admin', 'lang');
