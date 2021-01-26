@@ -80,6 +80,7 @@ $outlet = 'Rural Ayruvedic Hospital Kesbawa';
         $("#investigation_type").select2();
         $("#treatment_type").select2();
         $("#monitoring_type").select2();
+        $("#round_type").select2();
     });
 </script>
     <style>

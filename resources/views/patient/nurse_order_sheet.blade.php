@@ -53,7 +53,7 @@
                                 <select class="form-control select2-multi" multiple="multiple" name="treatment_type[]" id="treatment_type">
                                     <option value="">Select Treatment Type</option>
                                     @foreach ($treatment as $trt)
-                                    <option value="{{$trt->id}}">{{ucWords($trt->type)}}</option>
+                                    <option value="{{$trt->id}}" <?php if(in_array($trt->id,explode(',', $patient->treatment_id))) {?>selected <?php }?>>{{ucWords($trt->type)}}</option>
                                     @endforeach
                                 </select>
                             </div>

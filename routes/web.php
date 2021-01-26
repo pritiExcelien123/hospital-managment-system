@@ -155,12 +155,12 @@ Route::post('/update-nurseorder-sheet', ['as' => 'update-nurseorder-sheet', 'use
 
 // Monitoring Sheet
 Route::get('/monitoring-sheet/{id}', ['as' => 'monitoring-sheet', 'uses' => 'PatientController@monitoringSheet'])->middleware('auth', 'lang', 'staff');
-Route::post('/update-nurseorder-sheet', ['as' => 'update-nurseorder-sheet', 'uses' => 'PatientController@updateNurseOrderSheet'])->middleware('auth', 'doctor', 'lang');
+Route::post('/update-monitoring-sheet', ['as' => 'update-monitoring-sheet', 'uses' => 'PatientController@updateMonitoringSheet'])->middleware('auth', 'doctor', 'lang');
 
 
 // Treatment Sheet
 Route::get('/treatment-sheet/{id}', ['as' => 'treatment-sheet', 'uses' => 'PatientController@treatmentSheet'])->middleware('auth', 'lang', 'staff');
-Route::post('/update-nurseorder-sheet', ['as' => 'update-nurseorder-sheet', 'uses' => 'PatientController@updateNurseOrderSheet'])->middleware('auth', 'doctor', 'lang');
+Route::post('/update-treatment-sheet', ['as' => 'update-treatment-sheet', 'uses' => 'PatientController@updateTreatmentSheet'])->middleware('auth', 'doctor', 'lang');
 
 //Master Routes
 Route::get('/master/symptoms_type', ['as' => 'master/symptoms_type', 'uses' => 'MasterController@symptomsType'])->middleware('auth', 'lang');

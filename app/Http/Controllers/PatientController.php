@@ -17,6 +17,11 @@ use App\Investigation;
 use App\Treatment;
 use App\Monitoring;
 use App\Ward;
+use App\InvestigationSheet;
+use App\NurseOrderSheet;
+use App\MonitoringSheet;
+use App\TreatmentSheet;
+use App\Round_Shift;
 use Carbon\Carbon;
 use DB;
 use App\User;
@@ -753,48 +758,44 @@ public function addChannel(Request $request)
 
     public function updatePatientRecord(Request $result)
     {
-        // dd($result->patient_report);
         $user = Auth::user();
         $patientSymptoms = implode(',', $result->patient_symptoms);
         $patientArrivalName = implode(',', $result->patient_arrival_name);
 
         $patientInvestigationType = implode(',', $result->patient_investigation_type);
-        // print_r($patientInvestigationType);die;
-
-        $query = DB::table('ps_patients_record')
-            ->where('patient_id',$result->reg_pid)
-            ->update(array(
-                'temprature' => $result->temprature,
-                'rr' => $result->patient_rr,
-                'pulse_rate' => $result->pulse_rate,
-                'crt' => $result->patient_crt,
-                'bp' => $result->patient_bp,
-                'spo2' => $result->patient_spo2,
-                'weight' => $result->patient_weight,
-                'ht_lt' => $result->patient_ht_lt,
-                'mu_ac' => $result->patient_mu_ac,
-                'weight_legnth' => $result->patient_weight_legnth,
-                'systemic_examination' => $result->patient_systemic_examination,
-                'treatment_info' => $result->patient_treatment_info,
-                'diagcnosis_info' => $result->patient_diagnosis_info,
-                'date' => $result->patient_date,
-                'report' => $result->patient_report,
-                'symptom_id' => $patientSymptoms,
-                'arrival_id' => $patientArrivalName,
-                'investigation_id' => $patientInvestigationType
-            ));
-// print_r($query);die;
-        if ($query) {
+        $record = Patients_Record::find($result->reg_pid);
+      
+        if (!is_null($record)) {
+            $patientRecord = Patients_Record::find($result->reg_pid);
+            $patientRecord->temprature =  $result->temprature;
+            $patientRecord->rr = $result->patient_rr;
+            $patientRecord->pulse_rate = $result->pulse_rate;
+            $patientRecord->crt = $result->patient_crt;
+            $patientRecord->bp = $result->patient_bp;
+            $patientRecord->spo2 = $result->patient_spo2;
+            $patientRecord->weight = $result->patient_weight;
+            $patientRecord->ht_lt = $result->patient_ht_lt;
+            $patientRecord->mu_ac = $result->patient_mu_ac;
+            $patientRecord->weight_legnth = $result->patient_weight_legnth;
+            $patientRecord->systemic_examination = $result->patient_systemic_examination;
+            $patientRecord->treatment_info = $result->patient_treatment_info;
+            $patientRecord->diagnosis_info = $result->patient_diagnosis_info;
+            $patientRecord->date = $result->patient_date;
+            $patientRecord->report = $result->patient_report;
+            $patientRecord->symptom_id = $patientSymptoms;
+            $patientRecord->arrival_id = $patientArrivalName;
+            $patientRecord->investigation_id = $patientInvestigationType;
+            $patientRecord->save();
             //activity log
             activity()->performedOn($user)->log('Patient details updated!');
             return redirect()
                 ->route('searchPatient')
                 ->with('success', 'You have successfully updated patient details.');
-        } else {
-            return redirect()
+        }else{
+             return redirect()
                 ->route('searchPatient')
                 ->with('unsuccess', 'Error in Updating details !!!');
-        }
+        }      
 
     }
 
@@ -826,23 +827,24 @@ public function addChannel(Request $request)
     public function updateInvestigationSheet(Request $result)
     {
         $user = Auth::user();
-        $patientInvestigationType = implode(',', $result->investigation_type);
-        // print_r($patientInvestigationType);die;
-        $query = DB::table('ps_investigation_sheet')
-            ->where('patient_id',2101171)
-            ->update(array(
-                'date' => $result->investigation_date,                
-                'report' => $result->investigation_report,
-                'investigation_id' => $patientInvestigationType
-            ));
-// print_r($query);die;
-        if ($query) {
+        $patientInvestigationType = implode(',', $result->investigation_type);        
+
+        $investigation = InvestigationSheet::find($result->reg_pid);
+      
+        if (!is_null($investigation)) {
+            $investigationRecord = InvestigationSheet::find($result->reg_pid);
+            $investigationRecord->date =  $result->investigation_date;
+            $investigationRecord->report = $result->investigation_report;
+            $investigationRecord->investigation_id = $patientInvestigationType;            
+            $investigationRecord->save();
+
             //activity log
-            activity()->performedOn($user)->log('Patient details updated!');
+            activity()->performedOn($user)->log('Investigation Sheet updated!');
             return redirect()
                 ->route('searchPatient')
-                ->with('success', 'You have successfully updated patient details.');
-        } else {
+                ->with('success', 'You have successfully updated patient investigation sheet.');
+        }
+         else {
             return redirect()
                 ->route('searchPatient')
                 ->with('unsuccess', 'Error in Updating details !!!');
@@ -879,24 +881,25 @@ public function addChannel(Request $request)
     {
         $user = Auth::user();
         $treatmentType = implode(',', $result->treatment_type);
-        // print_r($treatmentType);die;
-        $query = DB::table('ps_nurse_order_sheet')
-            ->where('patient_id',2101171)
-            ->update(array(
-                'time' => $result->treatment_time,                
-                'total_dose' => $result->total_dose,
-                'remark' => $result->remark,
-                'report' => $result->report,
-                'treatment_id' => $treatmentType
-            ));
-// print_r($query);die;
-        if ($query) {
+        
+        $nurseOrderSheet = NurseOrderSheet::find($result->reg_pid);
+      
+        if (!is_null($nurseOrderSheet)) {
+            $nurseOrderSheet = NurseOrderSheet::find($result->reg_pid);
+            $nurseOrderSheet->time =  $result->treatment_time;
+            $nurseOrderSheet->total_dose = $result->total_dose;
+            $nurseOrderSheet->remark = $result->remark;            
+            $nurseOrderSheet->report = $result->report;          
+            $nurseOrderSheet->treatment_id = $treatmentType;            
+            $nurseOrderSheet->save();
+
             //activity log
             activity()->performedOn($user)->log('Nurse Order Sheet updated!');
             return redirect()
                 ->route('searchPatient')
-                ->with('success', 'You have successfully updated patient details.');
-        } else {
+                ->with('success', 'You have successfully updated nurse order sheet.');
+        }
+         else {
             return redirect()
                 ->route('searchPatient')
                 ->with('unsuccess', 'Error in Updating details !!!');
@@ -910,16 +913,49 @@ public function addChannel(Request $request)
     public function monitoringSheet($id)
     {
         $user = Auth::user();
-        $data = DB::table('ps_nurse_order_sheet')
-                ->join('patients', 'patients.id', '=', 'ps_nurse_order_sheet.patient_id')
-                ->select('ps_nurse_order_sheet.*','patients.name as patient_name')
-                ->where('ps_nurse_order_sheet.patient_id',$id)
+        $data = DB::table('ps_monitoring_sheet')
+                ->join('patients', 'patients.id', '=', 'ps_monitoring_sheet.patient_id')
+                ->select('ps_monitoring_sheet.*','patients.name as patient_name')
+                ->where('ps_monitoring_sheet.patient_id',$id)
                 ->first();
                 // print_r($data);die;
         $monitoring = Monitoring::where(function ($query) {
                 $query->where('status', '=', '1');                  
                 })->get();
         return view('patient.monitoring_sheet', ['title' => "Nurse Order Sheet",'patient' => $data,'monitoring' =>$monitoring]);
+    }
+
+
+    /*
+       update monitoring sheet
+    */
+
+    public function updateMonitoringSheet(Request $result)
+    {
+        $user = Auth::user();
+        $monitoringType = implode(',', $result->monitoring_type);
+        
+        $monitoringSheet = MonitoringSheet::find($result->reg_pid);
+      
+        if (!is_null($monitoringSheet)) {
+            $monitoringSheet = MonitoringSheet::find($result->reg_pid);
+            $monitoringSheet->report =  $result->report;
+            $monitoringSheet->monitoring_id  = $monitoringType;
+            $monitoringSheet->nurse_id = $monitoringType;            
+            $monitoringSheet->save();
+
+            //activity log
+            activity()->performedOn($user)->log('Monitoring Sheet updated!');
+            return redirect()
+                ->route('searchPatient')
+                ->with('success', 'You have successfully updated monitoring sheet.');
+        }
+         else {
+            return redirect()
+                ->route('searchPatient')
+                ->with('unsuccess', 'Error in Updating details !!!');
+        }
+
     }
 
 
@@ -938,7 +974,44 @@ public function addChannel(Request $request)
         $treatment = Treatment::where(function ($query) {
                 $query->where('status', '=', '1');                  
                 })->get();
-        return view('patient.treatment_sheet', ['title' => "Treatment Continuation Sheet",'patient' => $data,'treatment' =>$treatment]);
+        $round = Round_Shift::where(function ($query) {
+                $query->where('status', '=', '1');                  
+                })->get();
+        return view('patient.treatment_sheet', ['title' => "Treatment Continuation Sheet",'patient' => $data,'treatment' =>$treatment,'round' => $round]);
+    }
+
+
+     /*
+       update treatment sheet
+    */
+
+    public function updateTreatmentSheet(Request $result)
+    {
+        $user = Auth::user();
+        $treatmentType = implode(',', $result->treatment_type);
+        $roundType = implode(',', $result->round_type);
+        
+        $treatmentSheet = TreatmentSheet::find($result->reg_pid);
+      
+        if (!is_null($treatmentSheet)) {
+            $treatmentSheet = TreatmentSheet::find($result->reg_pid);
+            $treatmentSheet->report =  $result->report;
+            $treatmentSheet->treatment_id  = $treatmentType;
+            $treatmentSheet->round_id = $roundType;            
+            $treatmentSheet->save();
+
+            //activity log
+            activity()->performedOn($user)->log('Monitoring Sheet updated!');
+            return redirect()
+                ->route('searchPatient')
+                ->with('success', 'You have successfully updated monitoring sheet.');
+        }
+         else {
+            return redirect()
+                ->route('searchPatient')
+                ->with('unsuccess', 'Error in Updating details !!!');
+        }
+
     }
 
 

@@ -28,7 +28,7 @@
                 
 
                 @if ($patient)
-                <form class="form-horizontal" action="{{route('update-nurseorder-sheet')}}" method="POST">
+                <form class="form-horizontal" action="{{route('update-monitoring-sheet')}}" method="POST">
                     @csrf
                     <div class="box-body">
                         <div class="form-group">
@@ -52,7 +52,7 @@
                                 <select class="form-control select2-multi" multiple="multiple" name="monitoring_type[]" id="monitoring_type">
                                     <option value="">Select Monitoring Type</option>
                                     @foreach ($monitoring as $mnt)
-                                    <option value="{{$mnt->id}}">{{ucWords($mnt->name)}}</option>
+                                    <option value="{{$mnt->id}}" <?php if(in_array($mnt->id,explode(',', $patient->monitoring_id))) {?>selected <?php }?>>{{ucWords($mnt->name)}}</option>
                                     @endforeach
                                 </select>
                             </div>

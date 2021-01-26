@@ -28,7 +28,7 @@
                 
 
                 @if ($patient)
-                <form class="form-horizontal" action="{{route('update-nurseorder-sheet')}}" method="POST">
+                <form class="form-horizontal" action="{{route('update-treatment-sheet')}}" method="POST">
                     @csrf
                     <div class="box-body">
                         <div class="form-group">
@@ -52,7 +52,18 @@
                                 <select class="form-control select2-multi" multiple="multiple" name="treatment_type[]" id="treatment_type">
                                     <option value="">Select Treatment Type</option>
                                     @foreach ($treatment as $trt)
-                                    <option value="{{$trt->id}}">{{ucWords($trt->name)}}</option>
+                                    <option value="{{$trt->id}}" <?php if(in_array($trt->id,explode(',', $patient->treatment_id))) {?>selected <?php }?>>{{ucWords($trt->name)}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>  
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-2 control-label">{{__('Round')}}</label>
+                            <div class="col-sm-10">                                
+                                <select class="form-control select2-multi" multiple="multiple" name="round_type[]" id="round_type">
+                                    <option value="">Select Round Type</option>
+                                    @foreach ($round as $rd)
+                                    <option value="{{$rd->id}}" <?php if(in_array($rd->id,explode(',', $patient->round_id))) {?>selected <?php }?>>{{ucWords($rd->name)}}</option>
                                     @endforeach
                                 </select>
                             </div>

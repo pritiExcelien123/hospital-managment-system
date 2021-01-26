@@ -53,11 +53,13 @@
                                 <select class="form-control select2-multi" multiple="multiple" name="investigation_type[]" id="investigation_type">
                                     <option value="">Select Investigation Type</option>
                                     @foreach ($investigation as $inv)
-                                    <option value="{{$inv->id}}">{{ucWords($inv->type)}}</option>
+                                    <option value="{{$inv->id}}" <?php if(in_array($inv->id,explode(',', $patient->investigation_id))) {?>selected <?php }?>>{{ucWords($inv->type)}}</option>
                                     @endforeach
                                 </select>
                             </div>
                         </div>
+
+                        
                        <!--  <div class="form-group">
                             <label for="inputPassword3" class="col-sm-2 control-label">{{__('Name')}}</label>
                             <div class="col-sm-10">

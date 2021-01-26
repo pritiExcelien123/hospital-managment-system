@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 class Patients_Record extends Model
 {
-    protected $table = 'patients_record';
+    protected $table = 'ps_patients_record';
 
      /**
      * The attributes that are mass assignable.
