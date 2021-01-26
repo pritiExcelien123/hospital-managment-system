@@ -34,7 +34,7 @@
                         <div class="form-group">
                             <label for="inputEmail3" class="col-sm-2 control-label">{{__('Full Name')}}</label>
                             <div class="col-sm-10">
-                                <input  value="{{$patient->patient_name}}" type="text" required class="form-control" name="patient_name"
+                                <input  value="{{!empty($patient[0]->patient_name) ? $patient[0]->patient_name : '' }}" type="text" required class="form-control" name="patient_name"
                                     placeholder="Enter Patient Full Name">
                             </div>
                         </div>
@@ -52,21 +52,16 @@
                             <div class="col-sm-10">                                
                                 <select class="form-control select2-multi" multiple="multiple" name="investigation_type[]" id="investigation_type">
                                     <option value="">Select Investigation Type</option>
+                                     @php $investigationType= !empty($patient[0]->investigation_id) ? $patient[0]->investigation_id :'';@endphp
                                     @foreach ($investigation as $inv)
-                                    <option value="{{$inv->id}}" <?php if(in_array($inv->id,explode(',', $patient->investigation_id))) {?>selected <?php }?>>{{ucWords($inv->type)}}</option>
+                                    <option value="{{$inv->id}}" <?php if(in_array($inv->id,explode(',', $investigationType))) {?>selected <?php }?>>{{ucWords($inv->type)}}</option>
                                     @endforeach
                                 </select>
                             </div>
                         </div>
 
                         
-                       <!--  <div class="form-group">
-                            <label for="inputPassword3" class="col-sm-2 control-label">{{__('Name')}}</label>
-                            <div class="col-sm-10">
-                                <input  value="{{$patient->name}}" type="text" required class="form-control" name="investigation_name"
-                                    placeholder="Enter Investigation Name">
-                            </div>
-                        </div> -->
+                       
 
                         
                         <div class="form-group">
@@ -76,7 +71,7 @@
                                     <div class="input-group-addon">
                                         <i class="fa fa-calendar"></i>
                                     </div>
-                                    <input  value="{{$patient->date}}" type="date" class="form-control pull-right" name="investigation_date"
+                                    <input  value="{{!empty($patient[0]->date) ? $patient[0]->date : ''}}" type="date" class="form-control pull-right" name="investigation_date"
                                         placeholder="Enter Investigation Date">
                                 </div>
                             </div>
@@ -85,17 +80,17 @@
                         <div class="form-group">
                             <label for="inputPassword3" class="col-sm-2 control-label">{{__('Investigation Report')}}</label>
                             <div class="col-sm-10">
-                                <input  value="{{$patient->report}}" type="text" required class="form-control" name="investigation_report"
+                                <input  value="{{!empty($patient[0]->report) ? $patient[0]->report : ''}}" type="text" required class="form-control" name="investigation_report"
                                     placeholder="Enter Investigation Date">
                             </div>
                         </div>
                         
                         <!-- select -->
                         <div class="form-group">
-                            <input readonly value="{{$patient->id}}" type="text" class="form-control pull-right" name="reg_pid" style="display:none">
-                            
+                            <input readonly value="{{$patient[0]->id}}" type="text" class="form-control pull-right" name="reg_pid" style="display:none">
+                            @php $patient_id = !empty($patient[0]->patient_id) ?  $patient[0]->patient_id : '';@endphp
                             <div class="col-sm-3">
-                                <a href="{{ url('/patient-record/' . $patient->patient_id) }}" class="btn btn-danger pull-right">Back</a>
+                                <a href="{{ url('/patient-record/' . $patient_id) }}" class="btn btn-danger pull-right">Back</a>
                             </div>
 
                             <div class="col-sm-3">
@@ -103,7 +98,7 @@
                             </div>
 
                             <div class="col-sm-3">
-                                <a href="{{ url('/nurse-order-sheet/' . $patient->patient_id) }}" class="btn btn-danger pull-right">Nurse Order Sheet</a>
+                                <a href="{{ url('/nurse-order-sheet/' . $patient_id) }}" class="btn btn-danger pull-right">Nurse Order Sheet</a>
                             </div>
 
                         </div>

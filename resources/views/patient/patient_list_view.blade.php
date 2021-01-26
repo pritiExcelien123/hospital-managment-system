@@ -61,6 +61,7 @@
                                 <td>
                                     <div class="form-group">
                                         <select class="form-control" id="select_action" onchange="editPersonDetails({{$app->id}});">
+                                            <option value="patient-record">Select action</option>
                                             <option value="patient-record">Case Record</option>
                                             <option value="treatment-sheet">Treatment & continuation Sheet</option>
                                             <option value="nurse-order-sheet">Nurse Order Sheet</option>

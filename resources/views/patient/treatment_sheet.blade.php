@@ -82,16 +82,16 @@
                             <input readonly value="{{$patient->id}}" type="text" class="form-control pull-right" name="reg_pid" style="display:none">
                             
                             <div class="col-sm-3">
-                                <a href="{{ url('/nurse-order-sheet/' . $patient->patient_id) }}" class="btn btn-danger pull-right">Back</a>
+                                <a href="{{ url('/monitoring-sheet/' . $patient->patient_id) }}" class="btn btn-danger pull-right">Back</a>
                             </div>
 
                             <div class="col-sm-3">
                                 <button type="submit" class="btn btn-danger pull-right"><i class="fas fa-update"></i> Update </button>
                             </div>
 
-                            <div class="col-sm-3">
+                            <!-- <div class="col-sm-3">
                                 <a href="{{ url('/monitoring-sheet/' . $patient->patient_id) }}" class="btn btn-danger pull-right">Monitoring Sheet</a>
-                            </div>
+                            </div> -->
 
                         </div>
 

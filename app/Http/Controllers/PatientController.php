@@ -183,6 +183,29 @@ class PatientController extends Controller
             // $patient->image = $reg_num . ".png";
 // print_r($patient);die;
             $patient->save();
+            // echo $patient->id;die;
+            if($patient->id){
+                $patientRecord = new Patients_Record;
+                $patientRecord->patient_id = $patient->id;
+                $patientRecord->save();
+
+                $nurseRecord = new NurseOrderSheet;
+                $nurseRecord->patient_id = $patient->id;
+                $nurseRecord->save();
+
+                $monitoringRecord = new MonitoringSheet;
+                $monitoringRecord->patient_id = $patient->id;
+                $monitoringRecord->save();
+
+                $investigationRecord = new InvestigationSheet;
+                $investigationRecord->patient_id = $patient->id;
+                $investigationRecord->save();
+
+                $treatmentRecord = new TreatmentSheet;
+                $treatmentRecord->patient_id = $patient->id;
+                $treatmentRecord->save();
+            }
+
             session()->flash('regpsuccess', 'Patient ' . $request->reg_pname . ' Registered Successfully !');
             session()->flash('pid', "$reg_num");
 
@@ -807,11 +830,11 @@ public function addChannel(Request $request)
     {
         $user = Auth::user();
         $data = DB::table('ps_investigation_sheet')
-                ->join('patients', 'patients.id', '=', 'ps_investigation_sheet.patient_id')
-                ->join('ms_investigation_type', 'ms_investigation_type.id', '=', 'ps_investigation_sheet.investigation_id')
+                ->leftjoin('patients', 'patients.id', '=', 'ps_investigation_sheet.patient_id')
+                ->leftjoin('ms_investigation_type', 'ms_investigation_type.id', '=', 'ps_investigation_sheet.investigation_id')
                 ->select('ps_investigation_sheet.*','patients.name as patient_name','ms_investigation_type.type','ms_investigation_type.name')
                 ->where('ps_investigation_sheet.patient_id',$id)
-                ->first();
+                ->get();
         $investigation = Investigation::where(function ($query) {
                 $query->where('status', '=', '1');                  
                 })->get();
@@ -830,7 +853,7 @@ public function addChannel(Request $request)
         $patientInvestigationType = implode(',', $result->investigation_type);        
 
         $investigation = InvestigationSheet::find($result->reg_pid);
-      
+      // print_r($investigation);die;
         if (!is_null($investigation)) {
             $investigationRecord = InvestigationSheet::find($result->reg_pid);
             $investigationRecord->date =  $result->investigation_date;
@@ -860,11 +883,11 @@ public function addChannel(Request $request)
     {
         $user = Auth::user();
         $data = DB::table('ps_nurse_order_sheet')
-                ->join('patients', 'patients.id', '=', 'ps_nurse_order_sheet.patient_id')
-                ->join('ms_treatment_type', 'ms_treatment_type.id', '=', 'ps_nurse_order_sheet.treatment_id')
+                ->leftjoin('patients', 'patients.id', '=', 'ps_nurse_order_sheet.patient_id')
+                ->leftjoin('ms_treatment_type', 'ms_treatment_type.id', '=', 'ps_nurse_order_sheet.treatment_id')
                 ->select('ps_nurse_order_sheet.*','patients.name as patient_name','ms_treatment_type.type','ms_treatment_type.name')
                 ->where('ps_nurse_order_sheet.patient_id',$id)
-                ->first();
+                ->get();
                 // print_r($data);die;
         $treatment = Treatment::where(function ($query) {
                 $query->where('status', '=', '1');                  
