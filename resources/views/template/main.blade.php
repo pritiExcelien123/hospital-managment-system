@@ -81,6 +81,8 @@ $outlet = 'Rural Ayruvedic Hospital Kesbawa';
         $("#treatment_type").select2();
         $("#monitoring_type").select2();
         $("#round_type").select2();
+        $("#patient_systemic_examination").select2();
+        $("#patient_general_examination").select2();
     });
 </script>
     <style>
@@ -448,7 +450,7 @@ $outlet = 'Rural Ayruvedic Hospital Kesbawa';
                                         aria-hidden="true"></i> Search Patient</a>
                             </li>
                              <li class="{{Active::checkRoute(['patientList','patientList'])}}"><a
-                                    href="{{route('patientList')}}"></i><i class="fas fa-search"
+                                    href="{{route('patientList')}}"></i><i class="fas fa-user-plus"
                                         aria-hidden="true"></i> Patient List</a>
                             </li>
 
@@ -457,19 +459,19 @@ $outlet = 'Rural Ayruvedic Hospital Kesbawa';
                                         aria-hidden="true"></i> Patient Profile</a>
                             </li>
 
-                            {{--register in patient--}}
+                            <!-- {{--register in patient--}}
                             <li class="{{Active::checkRoute('register_in_patient_view')}}"><a
                                     href="{{route('register_in_patient_view')}}"><i class="fas fa-user-plus"
                                     area-hidden="true"></i><span> Register In Patient</span></a>
-                            </li>
+                            </li> -->
 
                             @if($user_type=='Doctor' || $user_type=='Admin')
-                            {{--discharge in patient--}}
+                            <!-- {{--discharge in patient--}}
                             <li class="{{Active::checkRoute('discharge_inpatient')}}"><a
                                     href="{{route('discharge_inpatient')}}"><i class="fa fa-hospital-o"
                                         area-hidden="true">
                                     </i><span>Discharge In Patient</span></a>
-                            </li>
+                            </li> -->
                             @endif
 
                         </ul>

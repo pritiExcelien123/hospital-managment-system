@@ -22,7 +22,7 @@ class Patients extends Model
 
     public function getAge()
     {
-        return Carbon::parse($this->attributes['bod'])->age;
+        return Carbon::parse($this->attributes['dob'])->age;
     }
 
     public function clinics()

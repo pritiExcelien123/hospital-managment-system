@@ -62,158 +62,142 @@
                         <label for="inputEmail3" class="col-sm-2 control-label">{{__('Full Name')}} <span
                                 style="color:red">*</span></label>
                         <div class="col-sm-10">
-                            <input type="text" minlength="10" pattern="^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$"
-                                required class="form-control" name="reg_pname" placeholder="Enter Patient Full Name">
+                            <input type="text"  pattern="^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$"
+                                 required class="form-control" name="reg_pname" placeholder="Enter Patient Full Name">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="inputEmail3" class="col-sm-2 control-label">{{__('Father Name')}} <span
-                                style="color:red">*</span></label>
+                        <label for="inputEmail3" class="col-sm-2 control-label">{{__('Father Name')}}</label>
                         <div class="col-sm-10">
                             <input type="text"  pattern="^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$"
-                                required class="form-control" name="father_name" placeholder="Enter Patient Father Name">
+                                 class="form-control" name="father_name" placeholder="Enter Patient Father Name">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="inputEmail3" class="col-sm-2 control-label">{{__('Mother Name')}} <span
-                                style="color:red">*</span></label>
+                        <label for="inputEmail3" class="col-sm-2 control-label">{{__('Mother Name')}}</label>
                         <div class="col-sm-10">
                             <input type="text"  pattern="^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$"
-                                required class="form-control" name="mother_name" placeholder="Enter Patient Mother Name">
+                                 class="form-control" name="mother_name" placeholder="Enter Patient Mother Name">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="inputEmail3" class="col-sm-2 control-label">{{__('Age')}} <span
-                                style="color:red">*</span></label>
+                        <label for="inputEmail3" class="col-sm-2 control-label">{{__('Age')}}</label>
                         <div class="col-sm-10">
                             <input type="text" 
-                                required class="form-control" name="patient_age" placeholder="Enter Patient Age">
+                                 class="form-control" name="patient_age" placeholder="Enter Patient Age">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="inputEmail3" class="col-sm-2 control-label">{{__('Refered From')}} <span
-                                style="color:red">*</span></label>
+                        <label for="inputEmail3" class="col-sm-2 control-label">{{__('Refered From')}}</label>
                         <div class="col-sm-10">
                             <input type="text"  pattern="^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$"
-                                required class="form-control" name="refered_from" placeholder="Enter Refered From">
+                                 class="form-control" name="refered_from" placeholder="Enter Refered From">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="inputEmail3" class="col-sm-2 control-label">{{__('Mode of Transport')}} <span
-                                style="color:red">*</span></label>
+                        <label for="inputEmail3" class="col-sm-2 control-label">{{__('Mode of Transport')}} </label>
                         <div class="col-sm-10">
                             <input type="text"  pattern="^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$"
-                                required class="form-control" name="mode_of_transport" placeholder="Enter Mode of Transport">
+                                 class="form-control" name="mode_of_transport" placeholder="Enter Mode of Transport">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="inputEmail3" class="col-sm-2 control-label">{{__('Immunizaition Status')}} <span
-                                style="color:red">*</span></label>
+                        <label for="inputEmail3" class="col-sm-2 control-label">{{__('Immunizaition Status')}} </label>
                         <div class="col-sm-10">
                             <input type="text"  pattern="^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$"
-                                required class="form-control" name="immunizaition_status" placeholder="Enter Immunizaition Status">
+                                 class="form-control" name="immunizaition_status" placeholder="Enter Immunizaition Status">
                         </div>
                     </div>
 
                     
                     <div class="form-group">
-                        <label for="inputPassword3" class="col-sm-2 control-label">{{__('Address')}} <span
-                                style="color:red">*</span></label>
+                        <label for="inputPassword3" class="col-sm-2 control-label">{{__('Address')}} </label>
                         <div class="col-sm-10">
-                            <input type="text" required class="form-control" name="reg_paddress"
+                            <input type="text"  class="form-control" name="reg_paddress"
                                 placeholder="Enter Patient Address ">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="inputPassword3" class="col-sm-2 control-label">{{__('Telephone')}} <span
-                                style="color:red">*</span></label>
+                        <label for="inputPassword3" class="col-sm-2 control-label">{{__('Telephone')}} </label>
                         <div class="col-sm-10">
-                            <input pattern="\+[0-9]{11}|[0-9]{10}" required maxlength="12" type="text"
+                            <input pattern="\+[0-9]{11}|[0-9]{10}"  maxlength="12" type="text"
                                 class="form-control" name="reg_ptel" placeholder="Patient Telephone Number">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="inputPassword3" class="col-sm-2 control-label">{{__('Occupation')}} <span
-                                style="color:red">*</span></label>
+                        <label for="inputPassword3" class="col-sm-2 control-label">{{__('Occupation')}} </label>
                         <div class="col-sm-10">
-                            <input type="text" required class="form-control" name="reg_poccupation"
+                            <input type="text"  class="form-control" name="reg_poccupation"
                                 placeholder="Enter Patient Occupation ">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="inputPassword3" class="col-sm-2 control-label">{{__('Birth Place')}} <span
-                                style="color:red">*</span></label>
+                        <label for="inputPassword3" class="col-sm-2 control-label">{{__('Birth Place')}} </label>
                         <div class="col-sm-10">
-                            <input type="text" required class="form-control" name="birth_place"
+                            <input type="text"  class="form-control" name="birth_place"
                                 placeholder="Enter Patient Birth Place ">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="inputPassword3" class="col-sm-2 control-label">{{__('Nationality')}} <span
-                                style="color:red">*</span></label>
+                        <label for="inputPassword3" class="col-sm-2 control-label">{{__('Nationality')}} </label>
                         <div class="col-sm-10">
-                            <input type="text" required class="form-control" name="nationality"
+                            <input type="text"  class="form-control" name="nationality"
                                 placeholder="Enter Patient Nationality ">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="inputPassword3" class="col-sm-2 control-label">{{__('Religion')}} <span
-                                style="color:red">*</span></label>
+                        <label for="inputPassword3" class="col-sm-2 control-label">{{__('Religion')}} </label>
                         <div class="col-sm-10">
-                            <input type="text" required class="form-control" name="religion"
+                            <input type="text"  class="form-control" name="religion"
                                 placeholder="Enter Patient Religion ">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="inputPassword3" class="col-sm-2 control-label">{{__('Income')}} <span
-                                style="color:red">*</span></label>
+                        <label for="inputPassword3" class="col-sm-2 control-label">{{__('Income')}} </label>
                         <div class="col-sm-10">
-                            <input type="text" required class="form-control" name="income"
+                            <input type="text"  class="form-control" name="income"
                                 placeholder="Enter Patient Income ">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="inputPassword3" class="col-sm-2 control-label">{{__('Guardian')}} <span
-                                style="color:red">*</span></label>
+                        <label for="inputPassword3" class="col-sm-2 control-label">{{__('Guardian')}} </label>
                         <div class="col-sm-10">
-                            <input type="text" required class="form-control" name="guardian"
+                            <input type="text"  class="form-control" name="guardian"
                                 placeholder="Enter Patient Guardian ">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="inputPassword3" class="col-sm-2 control-label">{{__('Guardian Address')}} <span
-                                style="color:red">*</span></label>
+                        <label for="inputPassword3" class="col-sm-2 control-label">{{__('Guardian Address')}} </label>
                         <div class="col-sm-10">
-                            <input type="text" required class="form-control" name="guardian_address"
+                            <input type="text"  class="form-control" name="guardian_address"
                                 placeholder="Enter Patient Guardian Address ">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="inputPassword3" class="col-sm-2 control-label">{{__('Occupation')}} <span
-                                style="color:red">*</span></label>
+                        <label for="inputPassword3" class="col-sm-2 control-label">{{__('Occupation')}} </label>
                         <div class="col-sm-10">
-                            <input type="text" required class="form-control" name="occupation"
+                            <input type="text"  class="form-control" name="occupation"
                                 placeholder="Enter Patient Occupation ">
                         </div>
                     </div>
 
                     <!-- select -->
                     <div class="form-group">
-                        <label class="col-sm-2 control-label">{{__('Sex')}}<span style="color:red">*</span></label>
+                        <label class="col-sm-2 control-label">{{__('Sex')}}</label>
                         <div class="col-sm-2 mr-0 pr-0">
-                            <select required class="form-control" name="reg_psex">
+                            <select  class="form-control" name="reg_psex">
                                 <option selected value="Male">Male</option>
                                 <option value="Female">Female</option>
                             </select>
                         </div>
 
-                        <label class="col-sm-1 control-label">{{__('DOB')}}<span style="color:red">*</span></label>
+                        <label class="col-sm-1 control-label">{{__('DOB')}}</label>
                         <div class="col-sm-3">
                             <div class="input-group date">
                                 <div class="input-group-addon">
                                     <i class="fa fa-calendar"></i>
                                 </div>
-                                <input type="date" required max="2014-12-30" class="form-control pull-right"
+                                <input type="date"  max="2014-12-30" class="form-control pull-right"
                                     name="reg_pbd" placeholder="Birthday">
                             </div>
 

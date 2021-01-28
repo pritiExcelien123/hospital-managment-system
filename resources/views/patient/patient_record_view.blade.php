@@ -30,14 +30,65 @@
                 <form class="form-horizontal" action="{{route('update-patient-records')}}" method="POST">
                     @csrf
                     <div class="box-body">
+
                         <div class="form-group">
+                            <label class="col-sm-3 control-label">{{__('Basic Information -')}}</label>
+                        </div> 
+                        <div style="border-style:groove;border-spacing:2px;">                        
+                            <div class="form-group">
+                                 <label for="inputEmail3" class="col-sm-2 control-label">{{__('Full Name')}}</label>
+                                <div class="col-sm-6">
+                                    <input  value="{{$patient->name}}" disabled="disabled" type="text" required class="form-control" name="patient_name"
+                                        placeholder="Enter Patient Full Name">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputEmail3" class="col-sm-2 control-label">{{__('Symptoms')}}</label>
+                                <div class="col-sm-6">
+                                    <?php //print_r($symptoms);die;?>
+                                    <select class="form-control select2-multi" multiple="multiple" name="patient_symptoms[]" id="patient_symptoms">
+                                        @foreach ($symptoms as $symptom)
+                                        <option value="{{$symptom->id}}" <?php if(in_array($symptom->id,explode(',', $patient->symptom_id))) {?>selected <?php }?>>{{ucWords($symptom->name)}}</option>
+                                        @endforeach
+                                    </select>
+
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                 <label for="inputEmail3" class="col-sm-2 control-label">{{__('Arrival')}}</label>
+                                <div class="col-sm-6">                               
+                                    <select class="form-control select2-multi" multiple="multiple" name="patient_arrival_name[]" id="patient_arrival_name">
+                                        <option value="">Select Arrival</option>
+                                        @foreach ($arrival as $avl)
+                                        <option value="{{$avl->id}}" <?php if(in_array($avl->id,explode(',', $patient->arrival_id))) {?>selected <?php }?>>{{ucWords($avl->name)}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                
+                            </div>
+                            <div class="form-group">
+                                <label for="inputEmail3" class="col-sm-2 control-label">{{__('Investigation Type')}}</label>
+                                <div class="col-sm-6">                                
+                                    <select class="form-control select2-multi" multiple="multiple" name="patient_investigation_type[]" id="patient_investigation_type">
+                                        <option value="">Select Investigation Type</option>
+                                        @foreach ($investigation as $inv)
+                                        <option value="{{$inv->id}}" <?php if(in_array($inv->id,explode(',', $patient->investigation_id))) {?>selected <?php }?>>{{ucWords($inv->name)}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                       <!--  <div class="form-group">
                             <label for="inputEmail3" class="col-sm-2 control-label">{{__('Full Name')}}</label>
                             <div class="col-sm-10">
                                 <input  value="{{$patient->name}}" disabled="disabled" type="text" required class="form-control" name="patient_name"
                                     placeholder="Enter Patient Full Name">
                             </div>
-                        </div>
-                        <div class="form-group">
+                        </div> -->
+                        <!-- <div class="form-group">
                             <label for="inputEmail3" class="col-sm-2 control-label">{{__('Symptoms')}}</label>
                             <div class="col-sm-10">
                                 <?php //print_r($symptoms);die;?>
@@ -48,8 +99,8 @@
                             </select>
 
                             </div>
-                        </div>
-                        <div class="form-group">
+                        </div> -->
+                        <!-- <div class="form-group">
                             <label for="inputEmail3" class="col-sm-2 control-label">{{__('Arrival')}}</label>
                             <div class="col-sm-10">                               
                                 <select class="form-control select2-multi" multiple="multiple" name="patient_arrival_name[]" id="patient_arrival_name">
@@ -59,8 +110,8 @@
                                     @endforeach
                                 </select>
                             </div>
-                        </div>
-                        <div class="form-group">
+                        </div> -->
+                       <!--  <div class="form-group">
                             <label for="inputEmail3" class="col-sm-2 control-label">{{__('Investigation Type')}}</label>
                             <div class="col-sm-10">                                
                                 <select class="form-control select2-multi" multiple="multiple" name="patient_investigation_type[]" id="patient_investigation_type">
@@ -70,7 +121,7 @@
                                     @endforeach
                                 </select>
                             </div>
-                        </div>
+                        </div> -->
                         <!-- <div class="form-group">
                             <label for="inputEmail3" class="col-sm-2 control-label">{{__('Investigation Name')}}</label>
                             <div class="col-sm-10">
@@ -79,143 +130,226 @@
                             </div>
                         </div> -->
                         <div class="form-group">
+                            <label class="col-sm-2 control-label">{{__('Vitals -')}}</label>
+                        </div>
+                        <div style="border-style:groove;border-spacing:2px;">                        
+                            <div class="form-group">
+                                 <label for="inputPassword3" class="col-sm-2 control-label">{{__('Temprature')}}</label>
+                                <div class="col-sm-2">
+                                    <input  type="text" value="{{$patient->temprature}}" required class="form-control" name="temprature"
+                                        placeholder="Enter Patient Temprature ">
+                                </div>
+
+                                <label for="inputPassword3" class="col-sm-2 control-label">{{__('RR')}}</label>
+                                <div class="col-sm-2">
+                                    <input  value="{{$patient->rr}}" type="tel" class="form-control" name="patient_rr"
+                                        placeholder="Patient RR">
+                                </div>
+
+                                <label for="inputPassword3" class="col-sm-2 control-label">{{__('Pulse Rate')}}</label>
+                                <div class="col-sm-2">
+                                    <input  value="{{$patient->pulse_rate}}" type="text" required class="form-control" name="pulse_rate"
+                                        placeholder="Enter Patient Pulse Rate">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">{{__('CRT')}}</label>
+                                <div class="col-sm-2">
+                                    <input  value="{{$patient->crt}}" type="text" required class="form-control" name="patient_crt"
+                                        placeholder="Enter Patient CRT ">
+                                </div>
+
+                                <label for="inputPassword3" class="col-sm-2 control-label">{{__('BP')}}</label>
+                                <div class="col-sm-2">
+                                    <input  value="{{$patient->bp}}" type="text" required class="form-control" name="patient_bp"
+                                        placeholder="Enter Patient BP">
+                                </div>
+
+                                <label for="inputPassword3" class="col-sm-2 control-label">{{__('SPO2')}}</label>
+                                <div class="col-sm-2">
+                                    <input  value="{{$patient->spo2}}" type="text" required class="form-control" name="patient_spo2"
+                                        placeholder="Enter Patient SPO2">
+                                </div>
+                            </div> 
+                        </div>   
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">{{__('Anthropology -')}}</label>
+                        </div> 
+                        <div style="border-style:groove;border-spacing:2px;">                        
+                            <div class="form-group">
+                                 <label for="inputPassword3" class="col-sm-2 control-label">{{__('Weight')}}</label>
+                                <div class="col-sm-2">
+                                    <input  value="{{$patient->weight}}" type="text" required class="form-control" name="patient_weight"
+                                        placeholder="Enter Patient Weight">
+                                </div>
+
+                               <label for="inputPassword3" class="col-sm-2 control-label">{{__('Ht & Lt')}}</label>
+                                <div class="col-sm-2">
+                                    <input  value="{{$patient->ht_lt}}" type="text" required class="form-control" name="patient_ht_lt"
+                                        placeholder="Enter Patient HT & LT">
+                                </div>
+
+                                <label for="inputPassword3" class="col-sm-2 control-label">{{__('Mu & Ac')}}</label>
+                                <div class="col-sm-2">
+                                    <input  value="{{$patient->mu_ac}}" type="text" required class="form-control" name="patient_mu_ac"
+                                        placeholder="Enter Patient MU & AC">
+                                </div>
+                                
+                            </div>
+                            <div class="form-group">
+                                <label for="inputPassword3" class="col-sm-2 control-label">{{__('Weight & Legnth')}}</label>
+                                <div class="col-sm-2">
+                                    <input  value="{{$patient->weight_legnth}}" type="text" required class="form-control" name="patient_weight_legnth"
+                                        placeholder="Enter Patient Weight & Legnth">
+                                </div>
+                            </div>
+
+                        </div>                
+<!--                         <div class="form-group">
                             <label for="inputPassword3" class="col-sm-2 control-label">{{__('Temprature')}}</label>
                             <div class="col-sm-10">
                                 <input  type="text" value="{{$patient->temprature}}" required class="form-control" name="temprature"
                                     placeholder="Enter Patient Temprature ">
                             </div>
-                        </div>
-                        <div class="form-group">
+                        </div> -->
+                        <!-- <div class="form-group">
                             <label for="inputPassword3" class="col-sm-2 control-label">{{__('RR')}}</label>
                             <div class="col-sm-10">
                                 <input  value="{{$patient->rr}}" type="tel" class="form-control" name="patient_rr"
                                     placeholder="Patient RR">
                             </div>
-                        </div>
-                        <div class="form-group">
+                        </div> -->
+                       <!--  <div class="form-group">
                             <label for="inputPassword3" class="col-sm-2 control-label">{{__('Pulse Rate')}}</label>
                             <div class="col-sm-10">
                                 <input  value="{{$patient->pulse_rate}}" type="text" required class="form-control" name="pulse_rate"
                                     placeholder="Enter Patient Pulse Rate">
                             </div>
-                        </div>
+                        </div> -->
 
-                        <div class="form-group">
+                        <!-- <div class="form-group">
                             <label for="inputPassword3" class="col-sm-2 control-label">{{__('BP')}}</label>
                             <div class="col-sm-10">
                                 <input  value="{{$patient->bp}}" type="text" required class="form-control" name="patient_bp"
                                     placeholder="Enter Patient BP">
                             </div>
-                        </div>
+                        </div> -->
 
-                        <div class="form-group">
+                        <!-- <div class="form-group">
                             <label for="inputPassword3" class="col-sm-2 control-label">{{__('SPO2')}}</label>
                             <div class="col-sm-10">
                                 <input  value="{{$patient->spo2}}" type="text" required class="form-control" name="patient_spo2"
                                     placeholder="Enter Patient SPO2">
                             </div>
-                        </div>
+                        </div> -->
 
-                        <div class="form-group">
+                       <!--  <div class="form-group">
                             <label for="inputPassword3" class="col-sm-2 control-label">{{__('Weight')}}</label>
                             <div class="col-sm-10">
                                 <input  value="{{$patient->weight}}" type="text" required class="form-control" name="patient_weight"
                                     placeholder="Enter Patient Weight">
                             </div>
-                        </div>
+                        </div> -->
 
-                        <div class="form-group">
+                        <!-- <div class="form-group">
                             <label for="inputPassword3" class="col-sm-2 control-label">{{__('Ht & Lt')}}</label>
                             <div class="col-sm-10">
                                 <input  value="{{$patient->ht_lt}}" type="text" required class="form-control" name="patient_ht_lt"
                                     placeholder="Enter Patient HT & LT">
                             </div>
-                        </div>
+                        </div> -->
 
-                        <div class="form-group">
+                       <!--  <div class="form-group">
                             <label for="inputPassword3" class="col-sm-2 control-label">{{__('Mu & Ac')}}</label>
                             <div class="col-sm-10">
                                 <input  value="{{$patient->mu_ac}}" type="text" required class="form-control" name="patient_mu_ac"
                                     placeholder="Enter Patient MU & AC">
                             </div>
-                        </div>
+                        </div> -->
 
-                        <div class="form-group">
+                       <!--  <div class="form-group">
                             <label for="inputPassword3" class="col-sm-2 control-label">{{__('Weight & Legnth')}}</label>
                             <div class="col-sm-10">
                                 <input  value="{{$patient->weight_legnth}}" type="text" required class="form-control" name="patient_weight_legnth"
                                     placeholder="Enter Patient Weight & Legnth">
                             </div>
-                        </div>
+                        </div> -->
 
                         <div class="form-group">
-                            <label for="inputPassword3" class="col-sm-2 control-label">{{__('Systemic Examination')}}</label>
-                            <div class="col-sm-10">
-                                <input  value="{{$patient->systemic_examination}}" type="text" required class="form-control" name="patient_systemic_examination"
-                                    placeholder="Enter Patient Systemic Examination">
+                            <label class="col-sm-3 control-label">{{__('Examinations -')}}</label>
+                        </div> 
+                        <div style="border-style:groove;border-spacing:2px;">                        
+                            <div class="form-group">                               
+                                <label for="inputEmail3" class="col-sm-3 control-label">{{__('Systemic Examination')}}</label>
+                                <div class="col-sm-4">                                
+                                    <select class="form-control select2-multi" multiple="multiple" name="patient_systemic_examination[]" id="patient_systemic_examination">
+                                        <option value="">Select Systemic Examination</option>
+                                        @foreach ($systematicexam as $exa)
+                                        <option value="{{$exa->id}}" <?php if(in_array($exa->id,explode(',', $exa->systemic_examination))) {?>selected <?php }?>>{{ucWords($exa->name)}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <label for="inputPassword3" class="col-sm-2 control-label">{{__('Treatment Info')}}</label>
+                                <div class="col-sm-2">
+                                    <input  value="{{$patient->treatment_info}}" type="text" required class="form-control" name="patient_treatment_info"
+                                        placeholder="Enter Patient Treatment Info">
+                                </div>
                             </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="inputPassword3" class="col-sm-2 control-label">{{__('Treatment Info')}}</label>
-                            <div class="col-sm-10">
-                                <input  value="{{$patient->treatment_info}}" type="text" required class="form-control" name="patient_treatment_info"
-                                    placeholder="Enter Patient Treatment Info">
+                            <div class="form-group">
+                                <label for="inputEmail3" class="col-sm-3 control-label">{{__('General Examination')}}</label>
+                                <div class="col-sm-4">                                
+                                    <select class="form-control select2-multi" multiple="multiple" name="patient_general_examination[]" id="patient_general_examination">
+                                        <option value="">Select General Examination</option>
+                                        @foreach ($generalexam as $ge)
+                                        <option value="{{$ge->id}}" <?php if(in_array($ge->id,explode(',', $ge->general_examination_id))) {?>selected <?php }?>>{{ucWords($ge->name)}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <label for="inputPassword3" class="col-sm-2 control-label">{{__('Diagnosis Info')}}</label>
+                                <div class="col-sm-2">
+                                    <input  value="{{$patient->diagnosis_info}}" type="text" required class="form-control" name="patient_diagnosis_info"
+                                        placeholder="Enter Patient Diagnosis Info">
+                                </div>
                             </div>
-                        </div>
+                            <!-- <div class="form-group">
 
+                               
 
-                        <div class="form-group">
-                            <label for="inputPassword3" class="col-sm-2 control-label">{{__('Diagnosis Info')}}</label>
-                            <div class="col-sm-10">
-                                <input  value="{{$patient->diagnosis_info}}" type="text" required class="form-control" name="patient_diagnosis_info"
-                                    placeholder="Enter Patient Diagnosis Info">
+                                
+                                
+                            </div> -->
+                            <div class="form-group">
+                                <label for="inputPassword3" class="col-sm-3 control-label">{{__('Report')}}</label>
+                                <div class="col-sm-4">
+                                    <input  value="{{$patient->report}}" type="text" required class="form-control" name="patient_report"
+                                        placeholder="Enter Patient Report">
+                                </div>
+
+                                 <label class="col-sm-2 control-label">{{__('Date')}}</label>
+                                <div class="col-sm-2 date">
+                                    <input type="date" value="{{$patient->date}}" required max="2014-12-30" class="form-control pull-right"
+                                        name="patient_date" placeholder="Enter Patient Date">
+                                </div>
                             </div>
+
                         </div>
-
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">{{__('CRT')}}</label>
-                            <div class="col-sm-10">
-                                <input  value="{{$patient->crt}}" type="text" required class="form-control" name="patient_crt"
-                                    placeholder="Enter Patient CRT ">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="inputPassword3" class="col-sm-2 control-label">{{__('Report')}}</label>
-                            <div class="col-sm-10">
-                                <input  value="{{$patient->report}}" type="text" required class="form-control" name="patient_report"
-                                    placeholder="Enter Patient Report">
-                            </div>
-                        </div>
-
-
+                       
 
                         <!-- select -->
-                        <div class="form-group">
-                            
-                            <label class="col-sm-2 control-label">{{__('Date')}}</label>
-                            <div class="col-sm-2 mr-0 pr-0 date">
-                                <input type="date" value="{{$patient->date}}" required max="2014-12-30" class="form-control pull-right"
-                                    name="patient_date" placeholder="Enter Patient Date">
-                            </div>
-
-                            
+                        <div class="form-group">   
+                        </div>
+                        <div class="form-group">                            
                             <input readonly value="{{$patient->id}}" type="text" class="form-control pull-right" name="reg_pid" style="display:none">
 
                             <div class="col-sm-3">
-                                        <button type="submit" class="btn btn-danger pull-right"><i class="fas fa-update"></i> Update </button>
+                                <button type="submit" class="btn btn-danger pull-right"><i class="fas fa-update"></i> Update </button>
                             </div>
 
                             <div class="col-sm-3">
                                 <a href="{{ url('/investigation-sheet/' . $patient->patient_id) }}" class="btn btn-danger pull-right">Investigation Sheet</a>
                             </div>
-
                         </div>
-
-
                     </div>
-
                 </form>
                 @endif
             </div>

@@ -22,6 +22,7 @@ use App\NurseOrderSheet;
 use App\MonitoringSheet;
 use App\TreatmentSheet;
 use App\Round_Shift;
+use App\Examination_Type;
 use Carbon\Carbon;
 use DB;
 use App\User;
@@ -771,8 +772,14 @@ public function addChannel(Request $request)
         $investigation = Investigation::where(function ($query) {
                 $query->where('status', '=', '1');                  
                 })->get();
+        $systematicexam = Examination_Type::where(function ($query) {
+                $query->where('status', '=', '1')->where('ex_type','systemic') ;                 
+                })->get();
+        $generalexam = Examination_Type::where(function ($query) {
+                $query->where('status', '=', '1')->where('ex_type','general') ;                 
+                })->get();
         // print_r($arrival);die;
-        return view('patient.patient_record_view', ['title' => "Edit Patient",'patient' => $data,'symptoms' => $symptoms,'arrival' => $arrival,'investigation' => $investigation]);
+        return view('patient.patient_record_view', ['title' => "Edit Patient",'patient' => $data,'symptoms' => $symptoms,'arrival' => $arrival,'investigation' => $investigation,'systematicexam' =>$systematicexam,'generalexam' =>$generalexam]);
     }
 
     /*
@@ -784,6 +791,8 @@ public function addChannel(Request $request)
         $user = Auth::user();
         $patientSymptoms = implode(',', $result->patient_symptoms);
         $patientArrivalName = implode(',', $result->patient_arrival_name);
+        $patientSystemicExamination = implode(',', $result->patient_systemic_examination);
+        $patientGeneralExamination = implode(',', $result->patient_general_examination);
 
         $patientInvestigationType = implode(',', $result->patient_investigation_type);
         $record = Patients_Record::find($result->reg_pid);
@@ -808,6 +817,8 @@ public function addChannel(Request $request)
             $patientRecord->symptom_id = $patientSymptoms;
             $patientRecord->arrival_id = $patientArrivalName;
             $patientRecord->investigation_id = $patientInvestigationType;
+            $patientRecord->systemic_examination = $patientSystemicExamination;
+            $patientRecord->general_examination_id = $patientGeneralExamination;
             $patientRecord->save();
             //activity log
             activity()->performedOn($user)->log('Patient details updated!');
