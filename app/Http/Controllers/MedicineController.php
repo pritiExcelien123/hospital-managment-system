@@ -135,9 +135,95 @@ class MedicineController extends Controller
                     "exist" => false,
                 ]);
             }
+        }        
+    }
+
+    public function Medicine()
+    {
+        $user = Auth::user();
+        
+        return view('medicine.register_medicine', ['title' => "Register Medicine"]);
+    }
+
+    public function registerMedicine(Request $request)
+    {
+        try {
+            $medicine = new Medicine;            
+            $medicine->name = $request->medicine_name;
+            $medicine->company = $request->company_name;
+            $date = date_create($request->expiry_date);
+            $medicine->qty = $request->quantity;            
+            $medicine->expiry_date = date_format($date, "Y-m-d");
+            $medicine->save();
+
+            session()->flash('regpsuccess', 'Medicine ' . $request->medicine_name . ' Registered Successfully !');
+            
+            // Log Activity
+            activity()->performedOn($medicine)->withProperties(['Medicine ID' => $medicine->id])->log('Medicine Registration Success');
+
+            return redirect()->back();
+        } catch (\Exception $e) {
+            // do task when error
+            $error = $e->getCode();
+            // log activity
+            activity()->performedOn($medicine)->withProperties(['Error Code' => $error, 'Error Message' => $e->getMessage()])->log('Medicine Registration Failed');
+
+            if ($error == '23000') {
+                session()->flash('regpfail', 'Medicine ' . $request->medicine_name . ' Is Already Registered..');
+                return redirect()->back();
+            }
+        }
+    }
+
+    public function medicineList()
+    {
+        $data=DB::table('medicines')->select('*')->get();
+        return view('medicine.medicine_list_view', ['title' => "Medicine List",'data'=>$data]);
+    }
+
+    public function editMedicine(Request $request)
+    {
+        $user = Auth::user();
+        $data = Medicine::find($request->id);
+        return view('medicine.edit_medicine_view', ['title' => "Edit Medicine", 'medicine' => $data]);
+    }
+
+    public function updateMedicine(Request $result)
+    {
+        // dd($result->reg_pbd);
+        $user = Auth::user();
+        
+        $query = DB::table('medicines')
+            ->where('id', $result->medicine_id)
+            ->update(array(
+                'name' => $result->medicine_name,
+                'company' => $result->company_name,
+                'expiry_date' => $result->expiry_date,
+                'qty' => $result->quantity,             
+            ));
+
+        if ($query) {
+            //activity log
+            activity()->performedOn($user)->log('Medicine details updated!');
+            return redirect()
+                ->route('medicine')
+                ->with('success', 'You have successfully updated medicine details.');
+        } else {
+            return redirect()
+                ->route('medicine')
+                ->with('unsuccess', 'Error in Updating details !!!');
         }
 
-        
+    }
+
+     public function medicineDelete($id)
+    {
+        // if ($action == "delete") {
+            Medicine::find($id)->delete();
+        // }if ($action == 'restore') {
+        //     Patients::withTrashed()->find($id)->restore();
+        // }
+        return redirect()->route('medicine-list', $id);
     }
 
   

@@ -181,3 +181,13 @@ Route::get('/master/round_shift', ['as' => 'master/round_shift', 'uses' => 'Mast
 Route::post('/master/save_round_shift', ['as' => 'master/save_round_shift', 'uses' => 'MasterController@roundShift'])->middleware('auth', 'admin', 'lang');
 Route::get('/master/treatment_type', ['as' => 'master/treatment_type', 'uses' => 'MasterController@treatmentType'])->middleware('auth', 'admin', 'lang');
 Route::post('/master/save_treatment_type', ['as' => 'master/save_treatment_type', 'uses' => 'MasterController@treatmentType'])->middleware('auth', 'admin', 'lang');
+
+
+//Medicine Routes
+
+Route::get('/medicine', ['as' => 'medicine', 'uses' => 'MedicineController@Medicine'])->middleware('auth');
+Route::post('/register-medicine', ['as' => 'register-medicine', 'uses' => 'MedicineController@registerMedicine'])->middleware('auth', 'staff');
+Route::get('/medicine-list', ['as' => 'medicine-list', 'uses' => 'MedicineController@medicineList'])->middleware('auth', 'staff', 'lang');
+Route::get('/edit-medicine/{id}', ['as' => 'edit-medicine', 'uses' => 'MedicineController@editMedicine'])->middleware('auth', 'doctor', 'lang');
+Route::post('/update-medicine', ['as' => 'update-medicine', 'uses' => 'MedicineController@updateMedicine'])->middleware('auth', 'doctor', 'lang');
+Route::get('/medicine-delete/{id}', ['as' => 'medicine-delete', 'uses' => 'MedicineController@medicineDelete'])->middleware('auth', 'doctor', 'lang');

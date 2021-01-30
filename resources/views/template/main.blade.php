@@ -476,6 +476,27 @@ $outlet = 'Rural Ayruvedic Hospital Kesbawa';
 
                         </ul>
                     </li>
+                    {{--Medicine--}}
+                    <li
+                        class="treeview {{Active::checkRoute(['medicine','inPatientReportData','register-medicine','mob_clinic_report','mon_stat_report','out_p_report','attendance_report'])}}">
+                        <a href="#">
+                            <i class="fas fa-sticky-note"></i>
+                            <span> Medicine</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            @if($user_type=="Admin"||$user_type=="Doctor")
+                            <li class="{{Active::checkRoute('medicine')}}"><a
+                                    href="{{route('medicine')}}"><i class="fa fa-stethoscope"
+                                        aria-hidden="true"></i> Register Medicine</a></li>
+                            <li class="{{Active::checkRoute('medicine')}}"><a
+                                    href="{{route('medicine-list')}}"><i class="fa fa-notes-medical"
+                                        aria-hidden="true"></i> Medicine List</a></li>
+                            @endif                            
+                        </ul>
+                    </li>
                     @endif
                     @if($user_type!='Pharmacist')
                     {{--create channel--}}
