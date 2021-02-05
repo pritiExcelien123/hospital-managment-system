@@ -191,3 +191,7 @@ Route::get('/medicine-list', ['as' => 'medicine-list', 'uses' => 'MedicineContro
 Route::get('/edit-medicine/{id}', ['as' => 'edit-medicine', 'uses' => 'MedicineController@editMedicine'])->middleware('auth', 'doctor', 'lang');
 Route::post('/update-medicine', ['as' => 'update-medicine', 'uses' => 'MedicineController@updateMedicine'])->middleware('auth', 'doctor', 'lang');
 Route::get('/medicine-delete/{id}', ['as' => 'medicine-delete', 'uses' => 'MedicineController@medicineDelete'])->middleware('auth', 'doctor', 'lang');
+
+//Payment Details Routes
+Route::get('/payment-details', ['as' => 'payment-details', 'uses' => 'PatientController@paymentDetail'])->middleware('auth', 'staff', 'lang');
+Route::get('/search-details', ['as' => 'search-details', 'uses' => 'PatientController@patientDetailData'])->middleware('auth', 'staff', 'lang');

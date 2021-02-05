@@ -1055,4 +1055,23 @@ public function addChannel(Request $request)
         $data=DB::table('patients')->select('*')->get();
          return view('patient.patient_list_view', ['title' => "Patient List",'data'=>$data]);
     }
+
+    public function paymentDetail(Request $request)
+    {
+        return view('medicine.payment_details', ['title' => "Search Patient", "old_keyword" => null, "search_result" => ""]);
+    }
+
+    public function patientDetailData(Request $request)
+    {
+        if ($request->cat == "name") {
+            $result = Patients::withTrashed()->where('name', 'LIKE', '%' . $request->keyword . '%')->get();
+        }
+        
+        if ($request->cat == "telephone") {
+            $result = Patients::withTrashed()->where('telephone', 'LIKE', '%' . $request->keyword . '%')->get();
+        }
+        $medicineData=DB::table('medicines')->select('*')->get();
+        return view('medicine.payment_details', ["title" => "Search Results", "old_keyword" => $request->keyword, "search_result" => $result,"medicine" =>$medicineData]);
+    }
+
 }

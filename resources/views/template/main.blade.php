@@ -494,6 +494,10 @@ $outlet = 'Rural Ayruvedic Hospital Kesbawa';
                             <li class="{{Active::checkRoute('medicine')}}"><a
                                     href="{{route('medicine-list')}}"><i class="fa fa-notes-medical"
                                         aria-hidden="true"></i> Medicine List</a></li>
+                            <li class="{{Active::checkRoute(['payment-details','search-details'])}}"><a
+                                    href="{{route('payment-details')}}"></i><i class="fas fa-search"
+                                        aria-hidden="true"></i> Payment Details</a>
+                            </li>
                             @endif                            
                         </ul>
                     </li>
