@@ -1,4 +1,4 @@
-@auth
+<?php if(auth()->guard()->check()): ?>
 <?php $user = Auth::user();
 $name = ucwords($user->name);
 $user_type = ucfirst($user->user_type);
@@ -15,21 +15,21 @@ $outlet = 'Rural Ayruvedic Hospital Kesbawa';
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Smart Hospitals | @yield('title')</title>
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>Smart Hospitals | <?php echo $__env->yieldContent('title'); ?></title>
+    <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
     <!-- Bootstrap 3.3.7 -->
-    <link rel="stylesheet" href="{{asset('bower_components/bootstrap/dist/css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="<?php echo e(asset('bower_components/bootstrap/dist/css/bootstrap.min.css')); ?>">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="{{asset('bower_components/font-awesome/css/font-awesome.min.css')}}">
+    <link rel="stylesheet" href="<?php echo e(asset('bower_components/font-awesome/css/font-awesome.min.css')); ?>">
     <!-- Ionicons -->
-    <link rel="stylesheet" href="{{asset('bower_components/Ionicons/css/ionicons.min.css')}}">
+    <link rel="stylesheet" href="<?php echo e(asset('bower_components/Ionicons/css/ionicons.min.css')); ?>">
     <!-- daterange picker -->
-    <link rel="stylesheet" href="{{asset('bower_components/bootstrap-daterangepicker/daterangepicker.css')}}">
+    <link rel="stylesheet" href="<?php echo e(asset('bower_components/bootstrap-daterangepicker/daterangepicker.css')); ?>">
     <!-- bootstrap datepicker -->
     <link rel="stylesheet"
-        href="{{asset('bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css')}}">
+        href="<?php echo e(asset('bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css')); ?>">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesnt work if you view the page via file:// -->
@@ -38,25 +38,25 @@ $outlet = 'Rural Ayruvedic Hospital Kesbawa';
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-    {{-- date picker start --}}
+    
     <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
-    {{-- date picker end --}}
+    
 
 
 
     <!-- Google Font -->
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
-    <link rel="stylesheet" href="{{asset('bower_components/bootstrap/dist/css/bootstrap.min.css')}}">
-    <link rel="stylesheet" href="{{asset('bower_components/Ionicons/css/ionicons.min.css')}}">
-    <link rel="stylesheet" href="{{asset('dist/css/skins/skin-blue.min.css')}}">
-    <link rel="stylesheet" href="{{asset('bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css')}}">
+    <link rel="stylesheet" href="<?php echo e(asset('bower_components/bootstrap/dist/css/bootstrap.min.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(asset('bower_components/Ionicons/css/ionicons.min.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(asset('dist/css/skins/skin-blue.min.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(asset('bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css')); ?>">
     <link rel="stylesheet"
-        href="{{asset('bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css')}}">
-    <link rel="stylesheet" href="{{asset('dist/css/AdminLTE.min.css')}}">
+        href="<?php echo e(asset('bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(asset('dist/css/AdminLTE.min.css')); ?>">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
         integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css">
@@ -64,12 +64,12 @@ $outlet = 'Rural Ayruvedic Hospital Kesbawa';
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js"></script>
 
-    @yield('custom_style_sheets')
-    <link rel="stylesheet" href="{{ URL::asset('/css/bsutility.css') }}">
+    <?php echo $__env->yieldContent('custom_style_sheets'); ?>
+    <link rel="stylesheet" href="<?php echo e(URL::asset('/css/bsutility.css')); ?>">
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 
-    <link rel="shortcut icon" type="image/png" href="{{asset('images/logo.png')}}" />
+    <link rel="shortcut icon" type="image/png" href="<?php echo e(asset('images/logo.png')); ?>" />
 
     <script src="https://code.jquery.com/jquery-3.4.1.js"
         integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
@@ -87,7 +87,7 @@ $outlet = 'Rural Ayruvedic Hospital Kesbawa';
     });
 </script>
     <style>
-        @yield('custom_styles') .spinner {
+        <?php echo $__env->yieldContent('custom_styles'); ?> .spinner {
             margin: 0;
             position: absolute;
             top: 50%;
@@ -153,7 +153,7 @@ $outlet = 'Rural Ayruvedic Hospital Kesbawa';
             }
         }
 
-        @keyframes sk-stretchdelay {
+        @keyframes  sk-stretchdelay {
 
             0%,
             40%,
@@ -287,18 +287,18 @@ $outlet = 'Rural Ayruvedic Hospital Kesbawa';
 
                         <li class="dropdown messages-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                @if(\Session::get('locale')=='si')
+                                <?php if(\Session::get('locale')=='si'): ?>
                                 සිං
-                                @else
+                                <?php else: ?>
                                 EN
-                                @endif
+                                <?php endif; ?>
                             </a>
                             <ul class="dropdown-menu">
                                 <li class="header">Select The Language</li>
                                 <li>
                                     <ul class="menu">
-                                        <li><a class="text-muted" href="{{route('lang','en')}}">English</a></li>
-                                        <li><a class="text-muted" href="{{route('lang','si')}}">සිංහල</a></li>
+                                        <li><a class="text-muted" href="<?php echo e(route('lang','en')); ?>">English</a></li>
+                                        <li><a class="text-muted" href="<?php echo e(route('lang','si')); ?>">සිංහල</a></li>
                                     </ul>
                                 </li>
                             </ul>
@@ -310,33 +310,34 @@ $outlet = 'Rural Ayruvedic Hospital Kesbawa';
                             <!-- Menu Toggle Button -->
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <!-- The user image in the navbar-->
-                                <img src="{{asset("$image_path")}}" class="user-image" alt="User Image">
+                                <img src="<?php echo e(asset("$image_path")); ?>" class="user-image" alt="User Image">
                                 <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                                <span class="hidden-xs">{{ucwords($name)}}</span>
+                                <span class="hidden-xs"><?php echo e(ucwords($name)); ?></span>
                             </a>
                             <ul class="dropdown-menu">
                                 <!-- The user image in the menu -->
                                 <li class="user-header">
-                                    <img src="{{asset("$image_path")}}" class="img-circle" alt="User Image">
+                                    <img src="<?php echo e(asset("$image_path")); ?>" class="img-circle" alt="User Image">
 
                                     <p>
-                                        {{$name}}
-                                        <small>{{$user_type}}</small>
+                                        <?php echo e($name); ?>
+
+                                        <small><?php echo e($user_type); ?></small>
                                     </p>
                                 </li>
                                 <!-- Menu Body -->
                                 <li class="user-body">
-                                    <h5 class="text-center">{{$outlet}}</h5>
+                                    <h5 class="text-center"><?php echo e($outlet); ?></h5>
                                 </li>
                                 <!-- Menu Footer-->
                                 <li class="user-footer">
                                     <div class="pull-left">
-                                        <a href="{{route('profile')}}" class="btn btn-default btn-flat">Profile</a>
+                                        <a href="<?php echo e(route('profile')); ?>" class="btn btn-default btn-flat">Profile</a>
                                     </div>
 
                                     <div class="pull-right">
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST">
-                                            @csrf
+                                        <form id="logout-form" action="<?php echo e(route('logout')); ?>" method="POST">
+                                            <?php echo csrf_field(); ?>
                                             <input type="submit" href="#" class="btn btn-default btn-flat"
                                                 value="Sign Out">
                                         </form>
@@ -359,10 +360,10 @@ $outlet = 'Rural Ayruvedic Hospital Kesbawa';
                 <!-- Sidebar user panel (optional) -->
                 <div class="user-panel">
                     <div class="pull-left image">
-                        <img src="{{asset("$image_path")}}" class="img-circle" alt="User Image">
+                        <img src="<?php echo e(asset("$image_path")); ?>" class="img-circle" alt="User Image">
                     </div>
                     <div class="pull-left info">
-                        <p>{{$name}}</p>
+                        <p><?php echo e($name); ?></p>
                         <!-- Status -->
                         <a href="#"><i class="fas fa-circle text-success"></i> Online</a>
                     </div>
@@ -372,114 +373,114 @@ $outlet = 'Rural Ayruvedic Hospital Kesbawa';
 
                 <ul class="sidebar-menu" data-widget="tree">
                     <li class="header">Main Menu</li>
-                    <li class="{{Active::checkRoute('dash')}}"><a href="{{route('dash')}}">
+                    <li class="<?php echo e(Active::checkRoute('dash')); ?>"><a href="<?php echo e(route('dash')); ?>">
                             <i class="fas fa-tachometer-alt"></i>
                             <span> Dashboard</span></a>
                     </li>
-                    @if($user_type!='Pharmacist')
-                    {{--patient--}}
+                    <?php if($user_type!='Pharmacist'): ?>
+                    
                     <li
-                        class="treeview {{Active::checkRoute(['master/symptoms_type','master/illness_arrival_type','master/general_examination','master/systemic_examination','master/investigation_type','master/round_shift','master/diagnosis_type','master/monitoring_type','master/treatment_type'])}}">
+                        class="treeview <?php echo e(Active::checkRoute(['master/symptoms_type','master/illness_arrival_type','master/general_examination','master/systemic_examination','master/investigation_type','master/round_shift','master/diagnosis_type','master/monitoring_type','master/treatment_type'])); ?>">
                         <a href="#"><i class="fas fa-user-injured"></i><span> Master</span>
                             <span class="pull-right-container">
                                 <i class="fa fa-angle-left pull-right"></i>
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li class="{{Active::checkRoute('master/symptoms_type')}}"><a href="{{route('master/symptoms_type')}}"><i class="fas fa-user-plus" aria-hidden="true"></i>
+                            <li class="<?php echo e(Active::checkRoute('master/symptoms_type')); ?>"><a href="<?php echo e(route('master/symptoms_type')); ?>"><i class="fas fa-user-plus" aria-hidden="true"></i>
                                     Symptoms Type</a></li>
 
-                            <li class="{{Active::checkRoute('master/illness_arrival_type')}}"><a
-                                    href="{{route('master/illness_arrival_type')}}"></i><i class="fas fa-search"
+                            <li class="<?php echo e(Active::checkRoute('master/illness_arrival_type')); ?>"><a
+                                    href="<?php echo e(route('master/illness_arrival_type')); ?>"></i><i class="fas fa-search"
                                         aria-hidden="true"></i> Illness Arrival Type</a>
                             </li>
 
-                            <li class="{{Active::checkRoute('master/general_examination')}}"><a
-                                    href="{{route('master/general_examination')}}"></i><i class="fas fa-id-card"
+                            <li class="<?php echo e(Active::checkRoute('master/general_examination')); ?>"><a
+                                    href="<?php echo e(route('master/general_examination')); ?>"></i><i class="fas fa-id-card"
                                         aria-hidden="true"></i> General Examination</a>
                             </li>
                             
-                            <li class="{{Active::checkRoute('master/systemic_examination')}}"><a
-                                    href="{{route('master/systemic_examination')}}"><i class="fas fa-user-plus"
+                            <li class="<?php echo e(Active::checkRoute('master/systemic_examination')); ?>"><a
+                                    href="<?php echo e(route('master/systemic_examination')); ?>"><i class="fas fa-user-plus"
                                     area-hidden="true"></i><span> Systemic Examination</span></a>
                             </li>
 
-                            <li class="{{Active::checkRoute('master/investigation_type')}}"><a
-                                    href="{{route('master/investigation_type')}}"><i class="fas fa-user-plus"
+                            <li class="<?php echo e(Active::checkRoute('master/investigation_type')); ?>"><a
+                                    href="<?php echo e(route('master/investigation_type')); ?>"><i class="fas fa-user-plus"
                                     area-hidden="true"></i><span> Investigation Type</span></a>
                             </li>   
 
-                            <li class="{{Active::checkRoute('master/diagnosis_type')}}"><a
-                                    href="{{route('master/diagnosis_type')}}"><i class="fas fa-user-plus"
+                            <li class="<?php echo e(Active::checkRoute('master/diagnosis_type')); ?>"><a
+                                    href="<?php echo e(route('master/diagnosis_type')); ?>"><i class="fas fa-user-plus"
                                     area-hidden="true"></i><span> Diagnosis Type</span></a>
                             </li>   
 
-                            <li class="{{Active::checkRoute('master/monitoring_type')}}"><a
-                                    href="{{route('master/monitoring_type')}}"><i class="fas fa-user-plus"
+                            <li class="<?php echo e(Active::checkRoute('master/monitoring_type')); ?>"><a
+                                    href="<?php echo e(route('master/monitoring_type')); ?>"><i class="fas fa-user-plus"
                                     area-hidden="true"></i><span> Monitoring Type</span></a>
                             </li>
 
-                            <li class="{{Active::checkRoute('master/treatment_type')}}"><a
-                                    href="{{route('master/treatment_type')}}"><i class="fas fa-user-plus"
+                            <li class="<?php echo e(Active::checkRoute('master/treatment_type')); ?>"><a
+                                    href="<?php echo e(route('master/treatment_type')); ?>"><i class="fas fa-user-plus"
                                     area-hidden="true"></i><span> Treatment Type</span></a>
                             </li>
 
-                            <li class="{{Active::checkRoute('master/round_shift')}}"><a
-                                    href="{{route('master/round_shift')}}"><i class="fas fa-user-plus"
+                            <li class="<?php echo e(Active::checkRoute('master/round_shift')); ?>"><a
+                                    href="<?php echo e(route('master/round_shift')); ?>"><i class="fas fa-user-plus"
                                     area-hidden="true"></i><span> Round Shift</span></a>
                             </li>                       
 
                         </ul>
                     </li>
-                    @endif
-                    @if($user_type!='Pharmacist')
-                    {{--patient--}}
+                    <?php endif; ?>
+                    <?php if($user_type!='Pharmacist'): ?>
+                    
                     <li
-                        class="treeview {{Active::checkRoute(['patient','register_in_patient_view','searchPatient','searchData','discharge_inpatient','patientProfileIntro','patientProfile'])}}">
+                        class="treeview <?php echo e(Active::checkRoute(['patient','register_in_patient_view','searchPatient','searchData','discharge_inpatient','patientProfileIntro','patientProfile'])); ?>">
                         <a href="#"><i class="fas fa-user-injured"></i><span> Patient</span>
                             <span class="pull-right-container">
                                 <i class="fa fa-angle-left pull-right"></i>
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li class="{{Active::checkRoute('patient')}}"><a href="{{route('patient')}}"></i><i
+                            <li class="<?php echo e(Active::checkRoute('patient')); ?>"><a href="<?php echo e(route('patient')); ?>"></i><i
                                         class="fas fa-user-plus" aria-hidden="true"></i>
                                     Register New</a></li>
 
-                            <li class="{{Active::checkRoute(['searchPatient','searchData'])}}"><a
-                                    href="{{route('searchPatient')}}"></i><i class="fas fa-search"
+                            <li class="<?php echo e(Active::checkRoute(['searchPatient','searchData'])); ?>"><a
+                                    href="<?php echo e(route('searchPatient')); ?>"></i><i class="fas fa-search"
                                         aria-hidden="true"></i> Search Patient</a>
                             </li>
-                             <li class="{{Active::checkRoute(['patientList','patientList'])}}"><a
-                                    href="{{route('patientList')}}"></i><i class="fas fa-user-plus"
+                             <li class="<?php echo e(Active::checkRoute(['patientList','patientList'])); ?>"><a
+                                    href="<?php echo e(route('patientList')); ?>"></i><i class="fas fa-user-plus"
                                         aria-hidden="true"></i> Patient List</a>
                             </li>
 
-                            <li class="{{Active::checkRoute(['patientProfileIntro','patientProfile'])}}"><a
-                                    href="{{route('patientProfileIntro')}}"></i><i class="fas fa-id-card"
+                            <li class="<?php echo e(Active::checkRoute(['patientProfileIntro','patientProfile'])); ?>"><a
+                                    href="<?php echo e(route('patientProfileIntro')); ?>"></i><i class="fas fa-id-card"
                                         aria-hidden="true"></i> Patient Profile</a>
                             </li>
 
-                            <!-- {{--register in patient--}}
-                            <li class="{{Active::checkRoute('register_in_patient_view')}}"><a
-                                    href="{{route('register_in_patient_view')}}"><i class="fas fa-user-plus"
+                            <!-- 
+                            <li class="<?php echo e(Active::checkRoute('register_in_patient_view')); ?>"><a
+                                    href="<?php echo e(route('register_in_patient_view')); ?>"><i class="fas fa-user-plus"
                                     area-hidden="true"></i><span> Register In Patient</span></a>
                             </li> -->
 
-                            @if($user_type=='Doctor' || $user_type=='Admin')
-                            <!-- {{--discharge in patient--}}
-                            <li class="{{Active::checkRoute('discharge_inpatient')}}"><a
-                                    href="{{route('discharge_inpatient')}}"><i class="fa fa-hospital-o"
+                            <?php if($user_type=='Doctor' || $user_type=='Admin'): ?>
+                            <!-- 
+                            <li class="<?php echo e(Active::checkRoute('discharge_inpatient')); ?>"><a
+                                    href="<?php echo e(route('discharge_inpatient')); ?>"><i class="fa fa-hospital-o"
                                         area-hidden="true">
                                     </i><span>Discharge In Patient</span></a>
                             </li> -->
-                            @endif
+                            <?php endif; ?>
 
                         </ul>
                     </li>
-                    {{--Medicine--}}
+                    
                     <li
-                        class="treeview {{Active::checkRoute(['medicine','inPatientReportData','register-medicine','mob_clinic_report','mon_stat_report','out_p_report','attendance_report'])}}">
+                        class="treeview <?php echo e(Active::checkRoute(['medicine','inPatientReportData','register-medicine','mob_clinic_report','mon_stat_report','out_p_report','attendance_report'])); ?>">
                         <a href="#">
                             <i class="fas fa-sticky-note"></i>
                             <span> Medicine</span>
@@ -488,119 +489,119 @@ $outlet = 'Rural Ayruvedic Hospital Kesbawa';
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            @if($user_type=="Admin"||$user_type=="Doctor")
-                            <li class="{{Active::checkRoute('medicine')}}"><a
-                                    href="{{route('medicine')}}"><i class="fa fa-stethoscope"
+                            <?php if($user_type=="Admin"||$user_type=="Doctor"): ?>
+                            <li class="<?php echo e(Active::checkRoute('medicine')); ?>"><a
+                                    href="<?php echo e(route('medicine')); ?>"><i class="fa fa-stethoscope"
                                         aria-hidden="true"></i> Register Medicine</a></li>
-                            <li class="{{Active::checkRoute('medicine')}}"><a
-                                    href="{{route('medicine-list')}}"><i class="fa fa-notes-medical"
+                            <li class="<?php echo e(Active::checkRoute('medicine')); ?>"><a
+                                    href="<?php echo e(route('medicine-list')); ?>"><i class="fa fa-notes-medical"
                                         aria-hidden="true"></i> Medicine List</a></li>
-                            <li class="{{Active::checkRoute(['payment-details','search-details'])}}"><a
-                                    href="{{route('payment-details')}}"></i><i class="fas fa-search"
+                            <li class="<?php echo e(Active::checkRoute(['payment-details','search-details'])); ?>"><a
+                                    href="<?php echo e(route('payment-details')); ?>"></i><i class="fas fa-search"
                                         aria-hidden="true"></i> Payment Details</a>
                             </li>
-                            @endif                            
+                            <?php endif; ?>                            
                         </ul>
                     </li>
-                    @endif
-                    @if($user_type!='Pharmacist')
-                    {{--create channel--}}
-                    <li class="{{Active::checkRoute('create_channel_view')}}">
-                        <a href="{{route('create_channel_view')}}">
+                    <?php endif; ?>
+                    <?php if($user_type!='Pharmacist'): ?>
+                    
+                    <li class="<?php echo e(Active::checkRoute('create_channel_view')); ?>">
+                        <a href="<?php echo e(route('create_channel_view')); ?>">
                             <i class="fas fa-folder-plus"></i>
                             <span> Create Appoinment</span>
                         </a>
                     </li>
-                    @endif
-                    @if($user_type=='Admin' || $user_type=='Doctor')
-                    {{--check patient--}}
-                    <li class="{{Active::checkRoute('check_patient_view')}}"><a
-                            href="{{route('check_patient_view')}}"><i class="fas fa-procedures"></i><span> Check
+                    <?php endif; ?>
+                    <?php if($user_type=='Admin' || $user_type=='Doctor'): ?>
+                    
+                    <li class="<?php echo e(Active::checkRoute('check_patient_view')); ?>"><a
+                            href="<?php echo e(route('check_patient_view')); ?>"><i class="fas fa-procedures"></i><span> Check
                                 Patient</span></a></li>
-                    @endif
+                    <?php endif; ?>
 
-                    @if($user_type=='Pharmacist' || $user_type=='Admin')
-                    {{--Issue Medicine--}}
-                    <li class="{{Active::checkRoute('issueMedicineView')}}"><a href="{{route('issueMedicineView')}}"><i
+                    <?php if($user_type=='Pharmacist' || $user_type=='Admin'): ?>
+                    
+                    <li class="<?php echo e(Active::checkRoute('issueMedicineView')); ?>"><a href="<?php echo e(route('issueMedicineView')); ?>"><i
                                 class="fa fa-plus-square"></i><span>Issue Medicine</span></a></li>
-                    @endif
+                    <?php endif; ?>
 
-                    <li class="treeview {{Active::checkRoute(['attendmore','myattend'])}}">
+                    <li class="treeview <?php echo e(Active::checkRoute(['attendmore','myattend'])); ?>">
                         <a href="#"><i class="fas fa-calendar-check"></i></i><span> Attendance</span>
                             <span class="pull-right-container">
                                 <i class="fa fa-angle-left pull-right"></i>
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li class="{{Active::checkRoute('myattend')}}"><a href="{{route('myattend')}}"><i
+                            <li class="<?php echo e(Active::checkRoute('myattend')); ?>"><a href="<?php echo e(route('myattend')); ?>"><i
                                         class="fas fa-calendar-day" aria-hidden="true"></i>&nbsp; My
                                     Attendance</a></li>
-                            @if($user_type=='Admssin')
-                            <li class="{{Active::checkRoute('attendmore')}}"><a href="{{route('attendmore')}}"><i
+                            <?php if($user_type=='Admssin'): ?>
+                            <li class="<?php echo e(Active::checkRoute('attendmore')); ?>"><a href="<?php echo e(route('attendmore')); ?>"><i
                                         class="fas fa-plus-square" aria-hidden="true"></i>&nbsp; More</a></li>
-                            @endif
+                            <?php endif; ?>
                         </ul>
                     </li>
 
-                    @if($user_type=='Admin')
-                    {{-- Users Operations --}}
+                    <?php if($user_type=='Admin'): ?>
+                    
 
-                    <li class="{{Active::checkRoute(['newuser','regfinger','resetuser'])}} treeview">
+                    <li class="<?php echo e(Active::checkRoute(['newuser','regfinger','resetuser'])); ?> treeview">
                         <a href="#"><i class="fas fa-users-cog"></i><span> Users</span>
                             <span class="pull-right-container">
                                 <i class="fa fa-angle-left pull-right"></i>
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li class="{{Active::checkRoute('newuser')}}"><a href="{{route('newuser')}}"><i
+                            <li class="<?php echo e(Active::checkRoute('newuser')); ?>"><a href="<?php echo e(route('newuser')); ?>"><i
                                         class="fa fa-user-plus" aria-hidden="true"></i>New
                                     User</a></li>
-                            <li class="{{Active::checkRoute('regfinger')}}"><a href="{{route('regfinger')}}"><i
+                            <li class="<?php echo e(Active::checkRoute('regfinger')); ?>"><a href="<?php echo e(route('regfinger')); ?>"><i
                                         class="fa fa-fingerprint" aria-hidden="true"></i>Register Fingerprint</a></li>
-                            <li class="{{Active::checkRoute('resetuser')}}"><a href="{{route('resetuser')}}"><i
+                            <li class="<?php echo e(Active::checkRoute('resetuser')); ?>"><a href="<?php echo e(route('resetuser')); ?>"><i
                                         class="fa fa-user-edit" aria-hidden="true"></i>Reset
                                     User</a></li>
                         </ul>
                     </li>
-                    @endif
+                    <?php endif; ?>
 
-                    {{-- Profile --}}
+                    
 
-                    <li class="{{Active::checkRoute('profile')}}"><a href="{{route('profile')}}"><i
+                    <li class="<?php echo e(Active::checkRoute('profile')); ?>"><a href="<?php echo e(route('profile')); ?>"><i
                                 class="fas fa-user"></i><span> Profile</span></a></li>
 
-                    {{-- Wards --}}
+                    
 
-                    @if($user_type!="Pharmacist")
-                    <li class="{{Active::checkRoute('wards')}}"><a href="{{route('wards')}}"><i
+                    <?php if($user_type!="Pharmacist"): ?>
+                    <li class="<?php echo e(Active::checkRoute('wards')); ?>"><a href="<?php echo e(route('wards')); ?>"><i
                                 class="fas fa-warehouse"></i>
                             <span>&nbsp;Wards</span></a></li>
-                    @endif
+                    <?php endif; ?>
 
-                    @if($user_type=="Admin")
-                    {{--add notices--}}
-                    <li class="{{Active::checkRoute('createnoticeview')}}">
-                        <a href="{{route('createnoticeview')}}">
+                    <?php if($user_type=="Admin"): ?>
+                    
+                    <li class="<?php echo e(Active::checkRoute('createnoticeview')); ?>">
+                        <a href="<?php echo e(route('createnoticeview')); ?>">
                             <i class="fas fa-envelope-open-text"></i>
                             <span> Notices</span>
                         </a>
                     </li>
-                    @endif
+                    <?php endif; ?>
 
-                    @if($user_type=="Admin"||$user_type=="Doctor")
-                    {{--statistics--}}
-                    <li class="{{Active::checkRoute(['stats','stats_old'])}}">
-                        <a href="{{route('stats')}}">
+                    <?php if($user_type=="Admin"||$user_type=="Doctor"): ?>
+                    
+                    <li class="<?php echo e(Active::checkRoute(['stats','stats_old'])); ?>">
+                        <a href="<?php echo e(route('stats')); ?>">
                             <i class="fas fa-chart-line"></i></i>
                             <span> Statistics</span>
                         </a>
                     </li>
-                    @endif
+                    <?php endif; ?>
 
 
-                    {{--report generation--}}
+                    
                     <li
-                        class="treeview {{Active::checkRoute(['inPatientReport','inPatientReportData','clinic_reports','mob_clinic_report','mon_stat_report','out_p_report','attendance_report'])}}">
+                        class="treeview <?php echo e(Active::checkRoute(['inPatientReport','inPatientReportData','clinic_reports','mob_clinic_report','mon_stat_report','out_p_report','attendance_report'])); ?>">
                         <a href="#">
                             <i class="fas fa-sticky-note"></i>
                             <span> Report Generation</span>
@@ -609,26 +610,26 @@ $outlet = 'Rural Ayruvedic Hospital Kesbawa';
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            @if($user_type=="Admin"||$user_type=="Doctor")
-                            <li class="{{Active::checkRoute('clinic_reports')}}"><a
-                                    href="{{route('clinic_reports')}}"><i class="fa fa-stethoscope"
+                            <?php if($user_type=="Admin"||$user_type=="Doctor"): ?>
+                            <li class="<?php echo e(Active::checkRoute('clinic_reports')); ?>"><a
+                                    href="<?php echo e(route('clinic_reports')); ?>"><i class="fa fa-stethoscope"
                                         aria-hidden="true"></i> Clinic Report</a></li>
-                            @endif
+                            <?php endif; ?>
 
-                            @if($user_type=="Admin"||$user_type=="Doctor")
-                            <li class="{{Active::checkRoute('mon_stat_report')}}"><a
-                                    href="{{route('mon_stat_report')}}"><i class="fa fa-sticky-note"
+                            <?php if($user_type=="Admin"||$user_type=="Doctor"): ?>
+                            <li class="<?php echo e(Active::checkRoute('mon_stat_report')); ?>"><a
+                                    href="<?php echo e(route('mon_stat_report')); ?>"><i class="fa fa-sticky-note"
                                         aria-hidden="true"></i> Monthly Statistic Report</a></li>
-                            @endif
+                            <?php endif; ?>
 
 
-                            <li class="{{Active::checkRoute(['inPatientReport','inPatientReportData'])}}"><a
-                                    href="{{route('inPatientReport')}}"><i class="fa fa-hospital-o"
+                            <li class="<?php echo e(Active::checkRoute(['inPatientReport','inPatientReportData'])); ?>"><a
+                                    href="<?php echo e(route('inPatientReport')); ?>"><i class="fa fa-hospital-o"
                                         area-hidden="true"></i><span>In Patient Stats</span></a>
                             </li>
 
-                            <li class="{{Active::checkRoute('attendance_report')}}"><a
-                                    href="{{route('attendance_report')}}"><i class="fa fa-clipboard"
+                            <li class="<?php echo e(Active::checkRoute('attendance_report')); ?>"><a
+                                    href="<?php echo e(route('attendance_report')); ?>"><i class="fa fa-clipboard"
                                         aria-hidden=" true"></i> Attendance Report</a></li>
                         </ul>
                     </li>
@@ -652,16 +653,16 @@ $outlet = 'Rural Ayruvedic Hospital Kesbawa';
             <!-- Content Header (Page header) -->
             <section class="content-header">
                 <h1>
-                    @yield('content_title')
-                    <small>@yield('content_description')</small>
+                    <?php echo $__env->yieldContent('content_title'); ?>
+                    <small><?php echo $__env->yieldContent('content_description'); ?></small>
                 </h1>
-                @yield('breadcrumbs')
+                <?php echo $__env->yieldContent('breadcrumbs'); ?>
 
             </section>
 
             <!-- Main content -->
             <section class="content container-fluid">
-                @yield('main_content')
+                <?php echo $__env->yieldContent('main_content'); ?>
             </section>
             <!-- /.content -->
         </div>
@@ -674,7 +675,7 @@ $outlet = 'Rural Ayruvedic Hospital Kesbawa';
                 Version 1.0
             </div>
             <!-- Default to the left -->
-            <strong>Copyright &copy; {{date('Y')}} <a href="#">Smart Hospital Systems</a>.</strong> All rights reserved.
+            <strong>Copyright &copy; <?php echo e(date('Y')); ?> <a href="#">Smart Hospital Systems</a>.</strong> All rights reserved.
         </footer>
 
 
@@ -683,30 +684,31 @@ $outlet = 'Rural Ayruvedic Hospital Kesbawa';
     </div>
 
 
-    <script src="{{asset('bower_components/bootstrap/dist/js/bootstrap.js')}}"></script>
-    <script src="{{asset('bower_components/fastclick/lib/fastclick.js')}}"></script>
-    <script src="{{asset('dist/js/adminlte.min.js')}}"></script>
+    <script src="<?php echo e(asset('bower_components/bootstrap/dist/js/bootstrap.js')); ?>"></script>
+    <script src="<?php echo e(asset('bower_components/fastclick/lib/fastclick.js')); ?>"></script>
+    <script src="<?php echo e(asset('dist/js/adminlte.min.js')); ?>"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.4.0/bootbox.min.js"></script>
     <script>
         $("#preloader").fadeOut();
     $("#spinner").fadeOut();
     </script>
     <!--Datepicker-->
-    <script src="{{asset('bower_components/moment/min/moment.min.js')}}"></script>
-    <script src="{{asset('bower_components/bootstrap-daterangepicker/daterangepicker.js')}}"></script>
-    <script src="{{asset('bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js')}}"></script>
-    <script src="{{asset('bower_components/datatables.net/js/jquery.dataTables.min.js')}}"></script>
-    <script src="{{asset('bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js')}}"></script>
-    <script src="{{asset('bower_components/jquery-slimscroll/jquery.slimscroll.min.js')}}"></script>
+    <script src="<?php echo e(asset('bower_components/moment/min/moment.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('bower_components/bootstrap-daterangepicker/daterangepicker.js')); ?>"></script>
+    <script src="<?php echo e(asset('bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('bower_components/datatables.net/js/jquery.dataTables.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('bower_components/jquery-slimscroll/jquery.slimscroll.min.js')); ?>"></script>
 
-    @yield('optional_scripts')
+    <?php echo $__env->yieldContent('optional_scripts'); ?>
 
 </body>
 
 </html>
 
-@endauth
+<?php endif; ?>
 
-@guest
+<?php if(auth()->guard()->guest()): ?>
 "aaaa";
-@endguest
+<?php endif; ?>
+<?php /**PATH C:\xampp\htdocs\hospital-managment-system\resources\views/template/main.blade.php ENDPATH**/ ?>

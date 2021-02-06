@@ -7,6 +7,7 @@ use App\Clinic;
 use App\Http\Controllers\Redirect;
 use App\inpatient;
 use App\Medicine;
+use App\Transaction;
 use App\Patients;
 use App\Patients_Record;
 use App\Prescription;
@@ -1072,6 +1073,39 @@ public function addChannel(Request $request)
         }
         $medicineData=DB::table('medicines')->select('*')->get();
         return view('medicine.payment_details', ["title" => "Search Results", "old_keyword" => $request->keyword, "search_result" => $result,"medicine" =>$medicineData]);
+    }
+
+
+    public function savePayment(Request $request)
+    {
+        try {
+            
+            $transaction = new Transaction;     
+            $medicineName = implode(',', $request->medicine_name);       
+            $transaction->transaction_id = mt_rand(100000, 999999);
+            $transaction->medicine_id = $medicineName;
+            $transaction->patient_id = $request->reg_pid;
+            $transaction->payment_mode = $request->payment_mode;
+            $transaction->amount = $request->total_amount;
+            $transaction->save();
+
+            session()->flash('regpsuccess', 'Payment ' . $request->reg_pid . ' Registered Successfully !');
+            
+            // Log Activity
+            activity()->performedOn($transaction)->withProperties(['Payment' => $transaction->transaction_id])->log('Payment Successfully');
+
+            return redirect()->back();
+        } catch (\Exception $e) {
+            // do task when error
+            $error = $e->getCode();
+            // log activity
+            activity()->performedOn($transaction)->withProperties(['Error Code' => $error, 'Error Message' => $e->getMessage()])->log('Payment Failed');
+
+            if ($error == '23000') {
+                session()->flash('regpfail', 'Payment ' . $request->reg_pid . ' Is Already Registered..');
+                return redirect()->back();
+            }
+        }
     }
 
 }

@@ -195,3 +195,4 @@ Route::get('/medicine-delete/{id}', ['as' => 'medicine-delete', 'uses' => 'Medic
 //Payment Details Routes
 Route::get('/payment-details', ['as' => 'payment-details', 'uses' => 'PatientController@paymentDetail'])->middleware('auth', 'staff', 'lang');
 Route::get('/search-details', ['as' => 'search-details', 'uses' => 'PatientController@patientDetailData'])->middleware('auth', 'staff', 'lang');
+Route::post('/save-payment', ['as' => 'save-payment', 'uses' => 'PatientController@savePayment'])->middleware('auth', 'staff');
